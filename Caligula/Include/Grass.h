@@ -29,6 +29,8 @@ struct Grass {
    Grid* grid_;
 
    float decideAccumulator;
+	float maturityAccumulator;
+	float tileToSpread;
 
    int x_, y_; // grid placement
 };

@@ -14,6 +14,7 @@ void Grass::Create(const char* p_textureFilePath, int xPos, int yPos) {
 
 	currentState_ = GROWING;
    decideAccumulator = 0;
+	maturityAccumulator = 5;
 }
 
 void Grass::Render(SDL_Renderer* renderer_) {
@@ -25,7 +26,12 @@ void Grass::Render(SDL_Renderer* renderer_) {
 }
 
 void Grass::Sense(float dt) {
-   
+	if (health_ <= 0)
+	{
+		maturityAccumulator -= dt;
+		if (maturityAccumulator <= 0)
+			currentState_ = DEAD;
+	}
 }
 
 void Grass::Decide(float dt) {
@@ -38,10 +44,12 @@ void Grass::Decide(float dt) {
       case GROWING:
          if (health_ <= 0)
          {
+				health_ = 0;
             currentState_ = SPREADING;
          }
          break;
       case SPREADING:
+			tileToSpread = rand() % 4;
          break;
       default:
          break;
@@ -61,12 +69,27 @@ void Grass::Act(float dt) {
 	case TRAMPLED:
 		break;
 	case SPREADING:
-      grid_->Spread(x_ - 1, y_);
-      grid_->Spread(x_ + 1, y_);
-      grid_->Spread(x_, y_ - 1);
-      grid_->Spread(x_, y_ + 1);
+		if (tileToSpread == 0)
+			if (grid_->Spread(x_ - 1, y_))
+				return;
+		if (tileToSpread == 1)
+			if (grid_->Spread(x_ + 1, y_))
+				return;
+		if (tileToSpread == 2)
+			if (grid_->Spread(x_, y_ - 1))
+				return;
+		if (tileToSpread == 3)
+			if (grid_->Spread(x_, y_ + 1))
+				return;
 		break;
 	case DEAD:
+		if (health_ <= 15) {
+			health_ += float(dt) * (float(rand()) / float(RAND_MAX)) * 10;
+		}
+		else
+		{
+			//delete grass
+		}
 		break;
 	}
 }

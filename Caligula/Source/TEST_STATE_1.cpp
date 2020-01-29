@@ -43,6 +43,7 @@ bool TEST_STATE_1::Update()
 	grid_.Render(m_renderer);
 	for (int i = 0; i < Grass_.size(); i++)
 	{
+		Grass_.at(i)->Sense(deltaTime_.AsSeconds());
       Grass_.at(i)->Decide(deltaTime_.AsSeconds());
       Grass_.at(i)->Act(deltaTime_.AsSeconds());
       Grass_.at(i)->Render(m_renderer);
