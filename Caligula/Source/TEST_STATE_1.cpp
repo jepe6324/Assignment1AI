@@ -47,6 +47,14 @@ bool TEST_STATE_1::Update()
       Grass_.at(i)->Decide(deltaTime_.AsSeconds());
       Grass_.at(i)->Act(deltaTime_.AsSeconds());
       Grass_.at(i)->Render(m_renderer);
+
+      if (Grass_.at(i)->currentState_ == DEAD)
+      {
+         Grass* grass = Grass_.at(i);
+         int tileIndex = grid_.GetTileIndex(grass->x_, grass->y_);
+         grid_.Tiles_.at(tileIndex)->grass_ = nullptr;
+         Grass_.erase(Grass_.begin()+i);
+      }
 	}
 	return true;
 }

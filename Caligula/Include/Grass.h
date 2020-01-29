@@ -10,7 +10,8 @@ enum GrassState {
 	GROWING,
 	TRAMPLED,
 	SPREADING,
-	DEAD
+	DYING,
+   DEAD
 };
 
 struct Grid;

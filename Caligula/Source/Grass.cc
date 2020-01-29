@@ -30,7 +30,7 @@ void Grass::Sense(float dt) {
 	{
 		maturityAccumulator -= dt;
 		if (maturityAccumulator <= 0)
-			currentState_ = DEAD;
+			currentState_ = DYING;
 	}
 }
 
@@ -82,12 +82,13 @@ void Grass::Act(float dt) {
 			if (grid_->Spread(x_, y_ + 1))
 				return;
 		break;
-	case DEAD:
+	case DYING:
 		if (health_ <= 15) {
 			health_ += float(dt) * (float(rand()) / float(RAND_MAX)) * 10;
 		}
 		else
 		{
+         currentState_ = DEAD;
 			//delete grass
 		}
 		break;
