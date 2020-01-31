@@ -35,7 +35,7 @@ void TEST_STATE_1::Enter()
 	}
 	for (int i = 0; i < 1; i++)
 	{
-		std::vector<State*> yeet;
+		std::vector<AgentState*> yeet;
 		Agent* tmpSheep;
 		tmpSheep = new Agent("../Assets/sheep.png", nullptr, yeet, Vector2(30, 0));
 		grid_.Tiles_[1]->agents_[0] = tmpSheep;
@@ -67,6 +67,7 @@ bool TEST_STATE_1::Update()
 	for (int i = 0; i < Sheep_.size(); i++)
 	{
 		Sheep_.at(i)->Render(m_renderer);
+		Sheep_.at(i)->Update(deltaTime_.AsSeconds());
 	}
 	return true;
 }

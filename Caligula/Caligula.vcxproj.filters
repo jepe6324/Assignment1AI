@@ -99,6 +99,9 @@
     <ClCompile Include="Source\WanderState.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\State.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Collider.h">

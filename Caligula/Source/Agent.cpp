@@ -33,7 +33,7 @@ void Agent::Render(SDL_Renderer* renderer_)
 		SDL_RenderDrawRect(renderer_, &collider_.GetBounds());
 }
 
-void Agent::Update(DeltaTime dt) // As milliseconds
+void Agent::Update(float dt) // As milliseconds
 {
    currentState_->Sense(); // add interval
    currentState_->Decide(); // add interval

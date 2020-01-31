@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Include\State.cpp" />
     <ClCompile Include="Source\Agent.cpp" />
     <ClCompile Include="Source\DeltaTime.cpp" />
     <ClCompile Include="Source\Collider.cpp" />

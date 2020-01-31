@@ -30,7 +30,7 @@ struct Agent : FSM
 
 	void Render(SDL_Renderer* renderer_);
 
-   void Update(DeltaTime dt);
+   void Update(float dt);
 };
 
 #endif //!AGENT_H_INCLUDED
