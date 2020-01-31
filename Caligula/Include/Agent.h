@@ -14,6 +14,7 @@ struct Agent : FSM
    Sprite* sprite_;
    RectangleCollider collider_;
    Vector2 position_;
+   const char* species_;
 
    Agent(const char* filepath,
          State* startState,
