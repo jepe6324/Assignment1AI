@@ -15,3 +15,12 @@ struct State
 	virtual bool Update() = 0; /*Should return false if state should be changed*/
 	virtual void Exit() {};
 };
+
+struct AgentState : State
+{
+   ~AgentState() {};
+
+   void Sense();
+   void Decide();
+   void Act();
+};
