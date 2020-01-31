@@ -38,4 +38,6 @@ void Agent::Update(float dt) // As milliseconds
    currentState_->Sense(); // add interval
    currentState_->Decide(); // add interval
    currentState_->Act();
+
+	collider_.SetPosition(position_.x_, position_.y_);
 }
