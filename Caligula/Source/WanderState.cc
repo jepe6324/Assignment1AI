@@ -9,6 +9,7 @@ void WanderState::Enter()
 bool WanderState::Update()
 {
 	//move in that direction
+	return true;
 }
 void WanderState::Exit()
 {

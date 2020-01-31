@@ -22,7 +22,8 @@ class TEST_STATE_1 : public State
 	std::vector<Grass*> Grass_;
    DeltaTime deltaTime_;
 
-   Agent* sheep;
+	std::vector<Agent*> Sheep_;
+	std::vector<Agent*> Wolf_;
 
 public:
 	TEST_STATE_1(SDL_Renderer& p_renderer); 

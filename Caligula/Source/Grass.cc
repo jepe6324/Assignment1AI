@@ -22,7 +22,8 @@ void Grass::Render(SDL_Renderer* renderer_) {
 	SDL_RenderCopy(renderer_, currentSprite_->GetTexture(), &currentSprite_->GetArea(), &dst);
 
 	SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 0);
-	SDL_RenderDrawRect(renderer_, &bounds_);
+	if (Config::DEBUGRENDER == TRUE)
+		SDL_RenderDrawRect(renderer_, &bounds_);
 }
 
 void Grass::Sense(float dt) {

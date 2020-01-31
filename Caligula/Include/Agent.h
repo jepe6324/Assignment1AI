@@ -10,6 +10,7 @@
 
 struct Sprite;
 struct DeltaTime;
+struct SDL_Renderer;
 
 struct Agent : FSM
 {
@@ -26,6 +27,8 @@ struct Agent : FSM
          std::vector<AgentState*> states,
          Vector2 startPos);
    ~Agent();
+
+	void Render(SDL_Renderer* renderer_);
 
    void Update(DeltaTime dt);
 };

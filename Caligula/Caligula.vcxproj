@@ -164,6 +164,7 @@
     <ClCompile Include="Source\SpriteHandler.cpp" />
     <ClCompile Include="Source\TEST_STATE_1.cpp" />
     <ClCompile Include="Source\Tile.cc" />
+    <ClCompile Include="Source\WanderState.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Agent.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Include\Tile.h" />
     <ClInclude Include="Include\DeltaTime.h" />
     <ClInclude Include="Include\Vector.h" />
+    <ClInclude Include="Include\WanderState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

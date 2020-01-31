@@ -8,6 +8,7 @@
 #include "Config.h"
 #include <time.h>
 
+
 TEST_STATE_1::TEST_STATE_1(SDL_Renderer& p_renderer) : m_renderer(&p_renderer)
 {
 	m_sound = Service<SoundHandler>::Get()->CreateSound("../Assets/plopp.wav");
@@ -32,6 +33,14 @@ void TEST_STATE_1::Enter()
       tmp->y_ = tmp->bounds_.y / Config::TILE_SIZE;
       tmp->grid_ = &grid_;
 	}
+	for (int i = 0; i < 1; i++)
+	{
+		std::vector<State*> yeet;
+		Agent* tmpSheep;
+		tmpSheep = new Agent("../Assets/sheep.png", nullptr, yeet, Vector2(30, 0));
+		grid_.Tiles_[1]->agents_[0] = tmpSheep;
+		Sheep_.push_back(tmpSheep);
+	}
 }
 
 bool TEST_STATE_1::Update()
@@ -54,6 +63,10 @@ bool TEST_STATE_1::Update()
          grid_.Tiles_.at(tileIndex)->grass_ = nullptr;
          Grass_.erase(Grass_.begin()+i);
       }
+	}
+	for (int i = 0; i < Sheep_.size(); i++)
+	{
+		Sheep_.at(i)->Render(m_renderer);
 	}
 	return true;
 }
