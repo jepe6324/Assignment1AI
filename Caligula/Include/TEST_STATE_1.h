@@ -9,6 +9,7 @@
 
 struct SDL_Renderer;
 class Sound;
+struct Agent;
 
 class TEST_STATE_1 : public State
 {
@@ -20,6 +21,9 @@ class TEST_STATE_1 : public State
 	Grid grid_;
 	std::vector<Grass*> Grass_;
    DeltaTime deltaTime_;
+
+   Agent* sheep;
+
 public:
 	TEST_STATE_1(SDL_Renderer& p_renderer); 
 	void Enter();

@@ -3,20 +3,23 @@
 #ifndef AGENT_H_INCLUDED
 #define AGENT_H_INCLUDED
 
-struct SDL_Renderer;
+#include "FSM.h"
+#include "Vector.h"
+#include "Collider.h"
+
 struct Sprite;
-struct Collider;
-struct State;
 
-struct Agent{
-   virtual ~Agent(){};
-
-   virtual void Update() = 0;
-   virtual void Render(SDL_Renderer *renderer) = 0;
-
+struct Agent : FSM
+{
    Sprite* sprite_;
-   Collider* collider_;
-   State* state_;
+   RectangleCollider collider_;
+   Vector2 position_;
+
+   Agent(const char* filepath,
+         State* startState,
+         std::vector<State*> states,
+         Vector2 startPos);
+   ~Agent();
 };
 
-#endif //AGENT_H_INCLUDED
+#endif //!AGENT_H_INCLUDED
