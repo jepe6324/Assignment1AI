@@ -165,6 +165,7 @@
     <ClCompile Include="Source\Tile.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Agent.h" />
     <ClInclude Include="Include\Collider.h" />
     <ClInclude Include="Include\CollisionHandler.h" />
     <ClInclude Include="Include\Config.h" />

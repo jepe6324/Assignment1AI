@@ -9,7 +9,7 @@ class FSM // Finite State Machine
 {
 	std::vector<State*> m_states;
 	State* m_currentState;
-	void SwitchState(std::string p_state);
+	void SwitchState(State* p_state);
 public:
 	FSM();
 	~FSM();
@@ -17,5 +17,4 @@ public:
 	void AddState(State* p_state);
 	void RemoveState(State* p_state);
 	void SetState(State* p_state);
-	void SetState(std::string p_state);
 };

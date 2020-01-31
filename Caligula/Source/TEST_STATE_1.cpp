@@ -11,7 +11,6 @@
 TEST_STATE_1::TEST_STATE_1(SDL_Renderer& p_renderer) : m_renderer(&p_renderer)
 {
 	m_sound = Service<SoundHandler>::Get()->CreateSound("../Assets/plopp.wav");
-	m_name = "TEST_STATE_1";
 }
 
 void TEST_STATE_1::Enter()

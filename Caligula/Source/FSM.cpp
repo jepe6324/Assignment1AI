@@ -11,11 +11,11 @@ FSM::~FSM()
 {
 }
 
-void FSM::SwitchState(std::string p_state)
+void FSM::SwitchState(State* p_state)
 {
 	for (State* state : m_states)
 	{
-		if (state->GetName() == p_state)
+		if (state == p_state)
 		{
 			if (m_currentState != nullptr)
 				m_currentState->Exit();
@@ -24,7 +24,7 @@ void FSM::SwitchState(std::string p_state)
 			return;
 		}
 	}
-	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not switch from %s to %s", m_currentState->GetName().c_str(),  p_state.c_str());
+	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not switch states");
 	// if this point is reached we are trying to switch to a state that does not exist, error msg or something perhaps?
 }
 
@@ -35,7 +35,7 @@ void FSM::Update()
 
 	if (m_currentState->Update() == false) // Switch state
 	{
-		SwitchState(m_currentState->NextState());
+		SwitchState(m_currentState->nextState);
 	}
 }
 
@@ -86,23 +86,5 @@ void FSM::SetState(State * p_state)
 			return;
 		}
 	}
-	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not set state: %s", p_state->GetName().c_str());
-}
-
-void FSM::SetState(std::string p_state)
-{
-	for (State* state : m_states)
-	{
-		if (state->GetName() == p_state)
-		{
-			if (m_currentState != nullptr)
-			{
-				m_currentState->Exit();
-			}
-			m_currentState = state;
-			m_currentState->Enter();
-			return;
-		}
-	}
-	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not set state: %s", p_state.c_str());
+	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not set state");
 }

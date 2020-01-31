@@ -155,5 +155,8 @@
     <ClInclude Include="Include\DeltaTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Agent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

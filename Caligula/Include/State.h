@@ -1,18 +1,17 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
-class State
+struct State
 {
-protected:
-	std::string m_name;
-	std::string m_nextState;
-public:
-	State() : m_name(""), m_nextState("") {};
+	std::vector<State*> subStates_;
+   State* nextState;
+
+	State() {};
 	virtual ~State() {};
-	virtual void Enter() {};
+	
+   virtual void Enter() {};
 	virtual bool Update() = 0; /*Should return false if state should be changed*/
 	virtual void Exit() {};
-	std::string NextState() { return m_nextState; };
-	std::string GetName() { return m_name; };
 };
