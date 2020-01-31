@@ -11,6 +11,7 @@
 struct Sprite;
 struct DeltaTime;
 struct SDL_Renderer;
+struct Grid;
 
 struct Agent : FSM
 {
@@ -18,6 +19,8 @@ struct Agent : FSM
    RectangleCollider collider_;
    Vector2 position_;
    const char* species_;
+   Grid* grid_;
+
 
    AgentState* currentState_;
    std::vector<AgentState*> stateList_;
@@ -29,8 +32,8 @@ struct Agent : FSM
    ~Agent();
 
 	void Render(SDL_Renderer* renderer_);
-
    void Update(float dt);
+   void Move(Vector2 newPos);
 };
 
 #endif //!AGENT_H_INCLUDED

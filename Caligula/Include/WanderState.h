@@ -5,7 +5,9 @@
 #include "State.h"
 #include "Vector.h"
 
-struct WanderState : State 
+struct Agent;
+
+struct WanderState : AgentState 
 {
 	std::vector<State*> subStates_;
 	State* nextState;
@@ -14,6 +16,10 @@ struct WanderState : State
 	void Enter();
 	bool Update();
 	void Exit();
+
+   void Sense(float dt);
+   void Decide(float dt);
+   void Act(float dt);
 };
 
 #endif // !WANDERSTATE_H_INCLUDED

@@ -6,6 +6,7 @@
 #include "Spritehandler.h"
 #include "Config.h"
 #include "DeltaTime.h"
+#include "Grid.h"
 
 Agent::Agent(const char* filepath,
              AgentState* startState,
@@ -35,9 +36,25 @@ void Agent::Render(SDL_Renderer* renderer_)
 
 void Agent::Update(float dt) // As milliseconds
 {
-   currentState_->Sense(); // add interval
-   currentState_->Decide(); // add interval
-   currentState_->Act();
+   currentState_->Sense(dt); // add interval
+   currentState_->Decide(dt); // add interval
+   currentState_->Act(dt);
 
-	collider_.SetPosition(position_.x_, position_.y_);
+   collider_.SetPosition(position_.x_ * Config::TILE_SIZE, position_.y_ * Config::TILE_SIZE);
+}
+
+void Agent::Move(Vector2 newPos) {
+   // These lines should be used when moving the agents
+   Vector2 oldPos = position_;
+
+   int index = grid_->GetTileIndex(oldPos.x_, oldPos.y_);
+   grid_->Tiles_.at(index)->agents_[0] = nullptr;
+
+   if (grid_->GetTileIndex(newPos.x_, newPos.y_) != -1)
+   {
+      position_ = newPos;
+   }
+
+   index = grid_->GetTileIndex(position_.x_, position_.y_);
+   grid_->Tiles_.at(index)->agents_[0] = this;
 }

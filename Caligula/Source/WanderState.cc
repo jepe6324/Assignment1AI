@@ -1,5 +1,6 @@
 //WANDERSTATE.CC
 #include "WanderState.h"
+#include "Agent.h"
 
 void WanderState::Enter()
 {
@@ -14,4 +15,17 @@ bool WanderState::Update()
 void WanderState::Exit()
 {
 	//switch state?
+}
+
+void WanderState::Sense(float dt)
+{
+}
+
+void WanderState::Decide(float dt)
+{
+}
+
+void WanderState::Act(float dt)
+{
+   agent_->Move(Vector2(1, 2));
 }

@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+struct Agent;
+
 struct State
 {
 	std::vector<State*> subStates_;
@@ -18,9 +20,10 @@ struct State
 
 struct AgentState : State
 {
+   Agent* agent_;
    ~AgentState() {};
 
-   void Sense();
-   void Decide();
-   void Act();
+   virtual void Sense(float dt) {};
+   virtual void Decide(float dt) {};
+   virtual void Act(float dt) {};
 };

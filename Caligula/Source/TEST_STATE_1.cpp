@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Config.h"
 #include <time.h>
+#include <WanderState.h>
 
 
 TEST_STATE_1::TEST_STATE_1(SDL_Renderer& p_renderer) : m_renderer(&p_renderer)
@@ -36,9 +37,11 @@ void TEST_STATE_1::Enter()
 	for (int i = 0; i < 1; i++)
 	{
 		std::vector<AgentState*> yeet;
-		Agent* tmpSheep;
-		tmpSheep = new Agent("../Assets/sheep.png", nullptr, yeet, Vector2(30, 0));
-		grid_.Tiles_[1]->agents_[0] = tmpSheep;
+		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), yeet, Vector2(13, 14));
+      tmpSheep->currentState_->agent_ = tmpSheep;
+      tmpSheep->grid_ = &grid_;
+      int index = grid_.GetTileIndex(13, 14);
+		grid_.Tiles_[index]->agents_[0] = tmpSheep;
 		Sheep_.push_back(tmpSheep);
 	}
 }
