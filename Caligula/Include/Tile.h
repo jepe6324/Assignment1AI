@@ -6,13 +6,14 @@
 #include <SDL.h>
 #include "Sprite.h"
 #include "Grass.h"
+#include "Agent.h"
 
 struct Grass;
 
 struct Tile {
 
    Grass* grass_; // if nullptr it's dirt
-
+   Agent* agents_[2];
 	SDL_Rect bounds_;
 	Sprite* currentSprite_;
 

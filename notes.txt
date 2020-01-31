@@ -1,0 +1,6 @@
+A sheep needs to be able to see grass.
+It needs to know how to walk towards it.
+It needs to be able to look at nearby tiles to see if they are empty (Aka, see other agents)
+
+Hearing radius, put anything it hears into a list of agents with unkown name.
+Then it needs to look at the thing to figure out what it is.

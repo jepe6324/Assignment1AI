@@ -5,6 +5,7 @@
 
 #include "Sprite.h"
 #include "Grid.h"
+#include "Agent.h"
 
 enum GrassState {
 	GROWING,

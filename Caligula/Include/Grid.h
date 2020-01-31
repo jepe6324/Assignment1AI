@@ -17,7 +17,8 @@ struct Grid {
    bool Spread(int x, int y);
 
    int GetTileIndex(int x, int y);
-
+   const char* LookAtTile(int x, int y);
+   const char* LookAtTile(int index); // the grid has to now if a agent is in a tile
 	std::vector<Tile*> Tiles_;
    std::vector<Grass*> *grass_;
 };
