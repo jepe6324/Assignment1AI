@@ -1,4 +1,5 @@
 #include "DeltaTime.h"
+#include <iostream>
 
 DeltaTime::DeltaTime()
 {

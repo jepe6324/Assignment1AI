@@ -8,6 +8,7 @@ struct Timer
    DeltaTime deltaTime_;
    float initialValue_;
    float currentValue_;
+   bool paused_;
 
    Timer(float startValue) { // Expects time as seconds
       initialValue_ = startValue;
@@ -16,7 +17,10 @@ struct Timer
    }
 
    bool IsDone() {
-      currentValue_ -= deltaTime_.AsSeconds();
+      if (!paused_) {
+         currentValue_ -= deltaTime_.AsSeconds();
+         return false;
+      }
       if (currentValue_ <= 0)
       {
          return true;
@@ -24,6 +28,11 @@ struct Timer
       return false;
    }
    void Reset() { currentValue_ = initialValue_; }
+   void Pause() { paused_ = true; }
+   void Start() { 
+      paused_ = false;
+      deltaTime_.Update();
+   }
 };
 
 #endif // !TIMER_H_INCLUDED

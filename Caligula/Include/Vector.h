@@ -11,18 +11,18 @@ struct Vector2 {
 	Vector2(float x, float y) { x_ = x; y_ = y; }
 	float x_;
 	float y_;
-	Vector2 normalize(Vector2 vec) {
-		Vector2 new_vec;
-		float x = _CMATH_::powf(vec.x_, 2.0f);
-		float y = _CMATH_::powf(vec.y_, 2.0f);
-		float square_root = _CMATH_::sqrtf(x + y);
-		new_vec.x_ = x / square_root;
-		new_vec.y_ = y / square_root;
-		return new_vec;
-	}
+   Vector2 normalize() {
+      float x = x * x;
+      float y = y * y;
+      float total = x + y;
+      float magnitude = _CMATH_::sqrt(total);
+      x /= magnitude;
+      y /= magnitude;
+      return Vector2(x, y);
+   }
 	float dot(Vector2 first, Vector2 second) {
-		first = normalize(first);
-		second = normalize(second);
+		first = first.normalize();
+		second = second.normalize();
 		return first.x_ * second.x_ + first.y_, second.y_;
 	}
 	Vector2 operator+(Vector2 other) {
