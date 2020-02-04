@@ -4,6 +4,7 @@
 
 #include "State.h"
 #include "Vector.h"
+#include "Timer.h"
 
 struct Agent;
 
@@ -12,6 +13,9 @@ struct WanderState : AgentState
 	std::vector<State*> subStates_;
 	State* nextState;
 	Vector2 direction_;
+	Timer decideTimer_;
+
+	WanderState();
 
 	void Enter();
 	bool Update();

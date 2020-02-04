@@ -36,7 +36,7 @@ void Grass::Sense(float dt) {
 
    if (grid_->LookAtTile(x_, y_) != "Grass") // If it senses something other that grass, it's being trampled
    {
-      currentState_ == TRAMPLED;
+      currentState_ = TRAMPLED;
    }
    else if (currentState_ == TRAMPLED) {
       currentState_ = GROWING;

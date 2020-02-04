@@ -1,6 +1,12 @@
 //WANDERSTATE.CC
 #include "WanderState.h"
 #include "Agent.h"
+#include <iostream>
+
+WanderState::WanderState():
+	decideTimer_(15)
+{
+}
 
 void WanderState::Enter()
 {
@@ -23,10 +29,18 @@ void WanderState::Sense(float dt)
 
 void WanderState::Decide(float dt)
 {
-
+	if (decideTimer_.IsDone())
+	{
+		int i, j;
+		i = -1 + (rand() % (1 - -1 + 1));
+		j = -1 + (rand() % (1 - -1 + 1));
+		direction_.x_ = i;
+		direction_.y_ = j;
+		decideTimer_.Reset();
+	}
 }
 
 void WanderState::Act(float dt)
 {
-   agent_->Move(Vector2(1, 2));
+   agent_->Move(direction_);
 }

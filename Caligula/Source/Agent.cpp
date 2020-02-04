@@ -29,7 +29,7 @@ void Agent::Render(SDL_Renderer* renderer_)
 	SDL_Rect dst = collider_.GetBounds(); //{ position_. , bounds_.y + health_, currentSprite_->GetArea().w - (health_ * 2), currentSprite_->GetArea().h - (health_ * 2) };
 	SDL_RenderCopy(renderer_, sprite_->GetTexture(), &sprite_->GetArea(), &dst);
 
-	SDL_SetRenderDrawColor(renderer_, 0, 150, 255, 0);
+	SDL_SetRenderDrawColor(renderer_, 255, 0, 0, 0);
 	if(Config::DEBUGRENDER == TRUE)
 		SDL_RenderDrawRect(renderer_, &collider_.GetBounds());
 }
