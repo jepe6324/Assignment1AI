@@ -23,6 +23,7 @@ void WanderState::Sense(float dt)
 
 void WanderState::Decide(float dt)
 {
+
 }
 
 void WanderState::Act(float dt)

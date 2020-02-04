@@ -9,9 +9,9 @@ struct Timer
    float initialValue_;
    float currentValue_;
 
-   Timer(float time) { // Expects time as seconds
-      initialValue_ = time;
-      currentValue_ = time;
+   Timer(float startValue) { // Expects time as seconds
+      initialValue_ = startValue;
+      currentValue_ = startValue;
       deltaTime_.Update(); // I do this to makesure that the actually used dt values are accurate
    }
 

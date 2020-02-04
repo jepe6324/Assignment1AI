@@ -88,8 +88,7 @@ const char* Grid::LookAtTile(int index)
    if (index > Tiles_.size()){
       return "cbt";
    }
-
-   if (Tiles_.at(index)->agents_[1] != nullptr) { // looks at the wolf
+   else if (Tiles_.at(index)->agents_[1] != nullptr) { // looks at the wolf
       return "Wolf";
    }
    else if (Tiles_.at(index)->agents_[0] != nullptr) { // looks at the sheep
