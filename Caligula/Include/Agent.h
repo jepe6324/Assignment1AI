@@ -34,6 +34,7 @@ struct Agent : FSM
 	void Render(SDL_Renderer* renderer_);
    void Update(float dt);
    void Move(Vector2 newPos);
+	void MoveInDirection(Vector2 direction);
 };
 
 #endif //!AGENT_H_INCLUDED

@@ -1,10 +1,9 @@
 //WANDERSTATE.CC
 #include "WanderState.h"
 #include "Agent.h"
-#include <iostream>
 
 WanderState::WanderState():
-	decideTimer_(15)
+	decideTimer_(10)
 {
 }
 
@@ -42,5 +41,5 @@ void WanderState::Decide(float dt)
 
 void WanderState::Act(float dt)
 {
-   agent_->Move(direction_);
+   agent_->MoveInDirection(direction_ * dt);
 }
