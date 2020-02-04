@@ -25,7 +25,7 @@ void TEST_STATE_1::Enter()
 	
 	for (int i = 0; i < 10; i++)
 	{
-      int randomNumber = rand()% (size + 1);
+      int randomNumber = rand()% (size);
 		Grass* tmp = new Grass;
 		tmp->Create("../Assets/grass.png", grid_.Tiles_.at(randomNumber)->bounds_.x, grid_.Tiles_.at(randomNumber)->bounds_.y);
       grid_.Tiles_.at(randomNumber)->grass_ = tmp;

@@ -2,7 +2,6 @@
 #ifndef TIMER_H_INCLUDED
 #define TIMER_H_INCLUDED
 #include "DeltaTime.h"
-#include <iostream>
 
 struct Timer
 {
@@ -14,17 +13,20 @@ struct Timer
    Timer(float startValue) { // Expects time as seconds
       initialValue_ = startValue;
       currentValue_ = startValue;
+      paused_ = false;
       deltaTime_.Update(); // I do this to makesure that the actually used dt values are accurate
    }
 
    bool IsDone() {
+      deltaTime_.Update();
+
       if (!paused_) {
-         currentValue_ -= deltaTime_.AsSeconds();
-         return false;
-      }
-      if (currentValue_ <= 0)
-      {
-         return true;
+         float dt = deltaTime_.AsSeconds();
+         currentValue_ -= dt;
+         if (currentValue_ <= 0)
+         {
+            return true;
+         }
       }
       return false;
    }

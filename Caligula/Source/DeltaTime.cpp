@@ -1,5 +1,4 @@
 #include "DeltaTime.h"
-#include <iostream>
 
 DeltaTime::DeltaTime()
 {
@@ -12,6 +11,8 @@ void DeltaTime::Update()
    tick = SDL_GetTicks();
 
    dt = tick - prevTick;
+
+   //std::cout << dt << std::endl;
 }
 
 float DeltaTime::AsMilliseconds()

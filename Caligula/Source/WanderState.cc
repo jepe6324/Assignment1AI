@@ -3,7 +3,7 @@
 #include "Agent.h"
 
 WanderState::WanderState():
-	decideTimer_(10)
+	decideTimer_(1)
 {
 }
 
