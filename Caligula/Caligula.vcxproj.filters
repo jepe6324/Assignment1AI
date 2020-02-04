@@ -167,5 +167,8 @@
     <ClInclude Include="Include\WanderState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

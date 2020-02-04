@@ -60,3 +60,9 @@ void Agent::Move(Vector2 newPos) {
    index = grid_->GetTileIndex(position_.x_, position_.y_);
    grid_->Tiles_.at(index)->agents_[0] = this;
 }
+
+void Agent::MoveInDirection(Vector2 direction)
+{
+	Vector2 newPos = position_ + direction;
+	Move(newPos);
+}
