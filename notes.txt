@@ -4,3 +4,5 @@ It needs to be able to look at nearby tiles to see if they are empty (Aka, see o
 
 Hearing radius, put anything it hears into a list of agents with unkown name.
 Then it needs to look at the thing to figure out what it is.
+
+Crows should be seperated from the grid

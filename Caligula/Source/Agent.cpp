@@ -36,9 +36,11 @@ void Agent::Render(SDL_Renderer* renderer_)
 
 void Agent::Update(float dt) // As milliseconds
 {
-   currentState_->Sense(dt); // add interval
-   currentState_->Decide(dt); // add interval
-   currentState_->Act(dt);
+   if (currentState_ != nullptr){
+      currentState_->Sense(dt); // add interval
+      currentState_->Decide(dt); // add interval
+      currentState_->Act(dt);
+   }
 
    collider_.SetPosition(position_.x_ * Config::TILE_SIZE, position_.y_ * Config::TILE_SIZE);
 }
