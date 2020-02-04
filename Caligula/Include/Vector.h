@@ -6,23 +6,29 @@
 #define VECTOR_H_INCLUDED
 
 #include <cmath>
+#include <iostream>
+
 struct Vector2 {
 	Vector2() { x_ = 0.0f; y_ = 0.0f; }
 	Vector2(float x, float y) { x_ = x; y_ = y; }
+
 	float x_;
 	float y_;
-   Vector2 normalize() {
-      float x = x * x;
-      float y = y * y;
+
+   void normalize() {
+      //std::cout << x_ << std::endl;
+      float x = powf(x_, 2);
+      float y = powf(y_, 2);
       float total = x + y;
       float magnitude = _CMATH_::sqrt(total);
       x /= magnitude;
       y /= magnitude;
-      return Vector2(x, y);
+      x_ = x;
+      y_ = y;
    }
 	float dot(Vector2 first, Vector2 second) {
-		first = first.normalize();
-		second = second.normalize();
+		first.normalize();
+		second.normalize();
 		return first.x_ * second.x_ + first.y_, second.y_;
 	}
 	Vector2 operator+(Vector2 other) {
