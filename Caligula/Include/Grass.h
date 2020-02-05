@@ -23,10 +23,12 @@ struct Grass {
 	void Sense(float dt);
 	void Decide(float dt);
    void Act(float dt);
+	float Eaten(float biteSize);
 
 	Sprite* currentSprite_;
 	SDL_Rect bounds_;
 	GrassState currentState_;
+	float minHealth_;
 	float health_;
    Grid* grid_;
 

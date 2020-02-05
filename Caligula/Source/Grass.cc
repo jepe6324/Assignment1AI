@@ -10,6 +10,7 @@ void Grass::Create(const char* p_textureFilePath, int xPos, int yPos) {
 	bounds_.h = Config::TILE_SIZE;
 	bounds_.w = Config::TILE_SIZE;
 	health_ = (rand() % (15+1 - 10)) + 10;
+	minHealth_ = 15;
 	currentSprite_ = Service<SpriteHandler>::Get()->CreateSprite(p_textureFilePath, 0, 0, bounds_.h, bounds_.w);
 
 	currentState_ = GROWING;
@@ -93,7 +94,7 @@ void Grass::Act(float dt) {
 				return;
 		break;
 	case DYING:
-		if (health_ <= 15) {
+		if (health_ <= minHealth_) {
 			health_ += float(dt) * (float(rand()) / float(RAND_MAX)) * 10;
 		}
 		else
@@ -102,5 +103,20 @@ void Grass::Act(float dt) {
 			//delete grass
 		}
 		break;
+	}
+}
+
+float Grass::Eaten(float biteSize)
+{
+	float remainingHealth = minHealth_ - health_;
+	if (biteSize < remainingHealth)
+	{
+		health_ += biteSize;
+		return biteSize;
+	}
+	else
+	{
+		health_ += remainingHealth;
+		return remainingHealth;
 	}
 }
