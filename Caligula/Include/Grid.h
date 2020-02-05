@@ -15,6 +15,7 @@ struct Grid {
 	void Render(SDL_Renderer* renderer_);
    
    bool Spread(int x, int y);
+   float EatGrass(float biteSize, Vector2 pos);
 
    int GetTileIndex(int x, int y);
    const char* LookAtTile(int x, int y);

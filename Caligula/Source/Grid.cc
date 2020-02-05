@@ -55,6 +55,16 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
    return false;
 }
 
+float Grid::EatGrass(float biteSize, Vector2 pos)
+{
+   int index = GetTileIndex(pos.x_, pos.y_);
+   if (Tiles_.at(index)->grass_ == nullptr)
+   {
+      return -1.0f;
+   }
+   return Tiles_.at(index)->grass_.Eaten(biteSize);
+}
+
 int Grid::GetTileIndex(int x, int y)
 {
    int index = 0;

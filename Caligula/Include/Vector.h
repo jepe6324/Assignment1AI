@@ -16,15 +16,12 @@ struct Vector2 {
 	float y_;
 
    void normalize() {
-      //std::cout << x_ << std::endl;
       float x = powf(x_, 2);
       float y = powf(y_, 2);
       float total = x + y;
       float magnitude = _CMATH_::sqrt(total);
-      x /= magnitude;
-      y /= magnitude;
-      x_ = x;
-      y_ = y;
+      x_ /= magnitude;
+      y_ /= magnitude;
    }
 	float dot(Vector2 first, Vector2 second) {
 		first.normalize();

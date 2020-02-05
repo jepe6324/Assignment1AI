@@ -99,6 +99,9 @@
     <ClCompile Include="Source\WanderState.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Random.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Collider.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

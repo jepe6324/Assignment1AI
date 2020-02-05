@@ -2,6 +2,7 @@
 #include "WanderState.h"
 #include "Agent.h"
 #include <iostream>
+#include "Random.h"
 
 WanderState::WanderState():
 	decideTimer_(1)
@@ -11,8 +12,8 @@ WanderState::WanderState():
 void WanderState::Enter()
 {
    float i, j;
-   i = float(rand()) / float(RAND_MAX);
-   j = float(rand()) / float(RAND_MAX);
+   i = Random::Randf(-1, 1);
+   j = Random::Randf(-1, 1);
    direction_.x_ = i;
    direction_.y_ = j;
    direction_.normalize();
@@ -38,8 +39,8 @@ void WanderState::Decide(float dt)
 	if (decideTimer_.IsDone())
 	{
       float i, j;
-      i = float(rand()) / float(RAND_MAX);
-      j = float(rand()) / float(RAND_MAX);
+   i = Random::Randf(-1, 1);
+   j = Random::Randf(-1, 1);
       direction_.x_ = i;
       direction_.y_ = j;
 
