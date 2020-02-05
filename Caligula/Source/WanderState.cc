@@ -30,10 +30,6 @@ void WanderState::Exit()
 	//switch state?
 }
 
-void WanderState::Sense(float dt)
-{
-}
-
 void WanderState::Decide(float dt)
 {
 	if (decideTimer_.IsDone())

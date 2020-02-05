@@ -38,5 +38,4 @@ struct Grass {
 
    int x_, y_; // grid placement
 };
-
 #endif // !GRASS_H_INCLUDED

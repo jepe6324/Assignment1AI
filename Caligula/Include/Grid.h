@@ -5,6 +5,7 @@
 
 #include "Tile.h"
 #include "Grass.h"
+#include "Vector.h"
 #include <vector>
 
 struct Grass; // NOTE: For some reason it suddenly requires forward declarations

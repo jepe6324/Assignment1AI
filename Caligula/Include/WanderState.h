@@ -21,7 +21,6 @@ struct WanderState : AgentState
 	bool Update();
 	void Exit();
 
-   void Sense(float dt);
    void Decide(float dt);
    void Act(float dt);
 };

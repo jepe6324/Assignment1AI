@@ -37,7 +37,6 @@ void Agent::Render(SDL_Renderer* renderer_)
 void Agent::Update(float dt) // As milliseconds
 {
    if (currentState_ != nullptr){
-      currentState_->Sense(dt); // add interval
       currentState_->Decide(dt); // add interval
       currentState_->Act(dt);
    }
@@ -65,4 +64,16 @@ void Agent::MoveInDirection(Vector2 direction)
 {
 	Vector2 newPos = position_ + direction;
 	Move(newPos);
+}
+
+void Agent::SenseFood()
+
+{
+   switch (species_)
+	case WOLF:
+      target_ = grid_->SenseSheep(position_, detectionRadius_);
+      break;
+   case SHEEP :
+      target_ = grid_->SenseGrass(position_, detectionRadius_);
+      break;
 }

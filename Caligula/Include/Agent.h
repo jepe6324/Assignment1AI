@@ -15,11 +15,20 @@ struct Grid;
 
 struct Agent : FSM
 {
+   enum Species {
+      WOLF,
+      SHEEP
+   };
+
    Sprite* sprite_;
    RectangleCollider collider_;
    Vector2 position_;
-   const char* species_;
+   Species species_;
    Grid* grid_;
+
+   Vector2 danger_;
+   Vector2 wall_;
+   Vector2* target_;
 
 
    AgentState* currentState_;
@@ -35,6 +44,8 @@ struct Agent : FSM
    void Update(float dt);
    void Move(Vector2 newPos);
 	void MoveInDirection(Vector2 direction);
+
+   Vector2* SenseFood(); // Gives you the vector 2 of closest food.
 };
 
 #endif //!AGENT_H_INCLUDED

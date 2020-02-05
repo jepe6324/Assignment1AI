@@ -1,4 +1,16 @@
-A sheep needs to be able to see grass.
+A sheep needs to be able to see grass. 
+Sense
+	Grass
+	Wolves
+Decide
+	Fear * Weight	// Needs a hard break point where they ignore hunger to run.
+	Hunger * Weight // If not scared it will eat any grass it sees if hungry enough
+					// If it can't see any grass it will wander randomly
+Act
+	EatGrass()
+	FUCKIGNRUN()
+	Wander()
+	
 It needs to know how to walk towards it.
 It needs to be able to look at nearby tiles to see if they are empty (Aka, see other agents)
 
@@ -6,3 +18,16 @@ Hearing radius, put anything it hears into a list of agents with unkown name.
 Then it needs to look at the thing to figure out what it is.
 
 Crows should be seperated from the grid
+
+
+Vector2* SenseFood() // Gives you the vector 2 of closest food.
+{
+	switch(species_)
+	case WOLF:
+		target_ = grid_->SenseSheep(Vector2 pos, float radius);
+		break;
+	Case SHEEP:
+		target_ = grid_->SenseGrass(Vector2 pos, float radius);
+}
+Vector2  SenseDanger(); // Gives an average of all nearby scary things.
+Vector2  SenseWall(); // Gives an average of all nearby walls;

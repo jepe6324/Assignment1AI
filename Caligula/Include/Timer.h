@@ -10,10 +10,10 @@ struct Timer
    float currentValue_;
    bool paused_;
 
-   Timer(float startValue) { // Expects time as seconds
+   Timer(float startValue, bool startPaused = false) { // Expects time as seconds
       initialValue_ = startValue;
       currentValue_ = startValue;
-      paused_ = false;
+      paused_ = startPaused;
       deltaTime_.Update(); // I do this to makesure that the actually used dt values are accurate
    }
 

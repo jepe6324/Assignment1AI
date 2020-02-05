@@ -23,7 +23,6 @@ struct AgentState : State
    Agent* agent_;
    ~AgentState() {};
 
-   virtual void Sense(float dt) {};
    virtual void Decide(float dt) {};
    virtual void Act(float dt) {};
 };
