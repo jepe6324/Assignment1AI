@@ -62,7 +62,7 @@ float Grid::EatGrass(float biteSize, Vector2 pos)
    {
       return -1.0f;
    }
-   return Tiles_.at(index)->grass_.Eaten(biteSize);
+	return Tiles_.at(index)->grass_->Eaten(biteSize); //Tiles_.at(index)->grass_.Eaten(biteSize);
 }
 
 int Grid::GetTileIndex(int x, int y)

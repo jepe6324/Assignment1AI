@@ -4,7 +4,14 @@
 #include "Config.h"
 #include <iostream>
 
-void Grass::Create(const char* p_textureFilePath, int xPos, int yPos) {
+Grass::Grass():
+	EatenTimer_(3)
+{
+	EatenTimer_.Pause();
+}
+
+void Grass::Create(const char* p_textureFilePath, int xPos, int yPos)
+{
 	bounds_.x = xPos;
 	bounds_.y = yPos;
 	bounds_.h = Config::TILE_SIZE;
@@ -103,6 +110,12 @@ void Grass::Act(float dt) {
 			//delete grass
 		}
 		break;
+	case EATEN:
+		if (EatenTimer_.IsDone())
+		{
+			currentState_ = GROWING;
+		}
+		break;
 	}
 }
 
@@ -112,11 +125,15 @@ float Grass::Eaten(float biteSize)
 	if (biteSize < remainingHealth)
 	{
 		health_ += biteSize;
+		currentState_ = EATEN;
+		EatenTimer_.Start();
+		EatenTimer_.Reset();
 		return biteSize;
 	}
 	else
 	{
 		health_ += remainingHealth;
+		currentState_ = DYING;
 		return remainingHealth;
 	}
 }
