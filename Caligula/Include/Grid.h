@@ -6,6 +6,7 @@
 #include "Tile.h"
 #include "Grass.h"
 #include "Vector.h"
+#include "Agent.h"
 #include <vector>
 
 struct Grass; // NOTE: For some reason it suddenly requires forward declarations
@@ -21,8 +22,12 @@ struct Grid {
    int GetTileIndex(int x, int y);
    const char* LookAtTile(int x, int y);
    const char* LookAtTile(int index); // the grid has to now if a agent is in a tile
-	std::vector<Tile*> Tiles_;
+	std::vector<Tile*> tiles_;
    std::vector<Grass*> *grass_;
+   std::vector<Agent*> *agents_;
+
+   Vector2* SenseSheep(Vector2 pos, float radius);
+   Vector2* SenseGrass(Vector2 pos, float radius);
 };
 
 #endif // !GRID_H_INCLUDED

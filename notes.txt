@@ -10,6 +10,7 @@ Act
 	EatGrass()
 	FUCKIGNRUN()
 	Wander()
+	Breed()
 	
 It needs to know how to walk towards it.
 It needs to be able to look at nearby tiles to see if they are empty (Aka, see other agents)

@@ -42,7 +42,7 @@ void Grass::Sense(float dt) {
 			currentState_ = DYING;
 	}
 
-   if (grid_->LookAtTile(x_, y_) != "Grass") // If it senses something other that grass, it's being trampled
+   if (grid_->LookAtTile(position_.x_, position_.y_) != "Grass") // If it senses something other that grass, it's being trampled
    {
       currentState_ = TRAMPLED;
    }
@@ -88,16 +88,16 @@ void Grass::Act(float dt) {
 		break;
 	case SPREADING:
 		if (tileToSpread == 0)
-			if (grid_->Spread(x_ - 1, y_))
+			if (grid_->Spread(position_.x_ - 1, position_.y_))
 				return;
 		if (tileToSpread == 1)
-			if (grid_->Spread(x_ + 1, y_))
+			if (grid_->Spread(position_.x_ + 1, position_.y_))
 				return;
 		if (tileToSpread == 2)
-			if (grid_->Spread(x_, y_ - 1))
+			if (grid_->Spread(position_.x_, position_.y_ - 1))
 				return;
 		if (tileToSpread == 3)
-			if (grid_->Spread(x_, y_ + 1))
+			if (grid_->Spread(position_.x_, position_.y_+ 1))
 				return;
 		break;
 	case DYING:

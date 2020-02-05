@@ -14,7 +14,7 @@ void Grid::Create()
 		{
 			Tile* tmp = new Tile;
 			tmp->Create("../Assets/dirt.png", posX, posY, difference, difference);
-			Tiles_.push_back(tmp);
+			tiles_.push_back(tmp);
 			posX += difference;
 		}
 		posY += difference;
@@ -23,7 +23,7 @@ void Grid::Create()
 };
 
 void Grid::Render(SDL_Renderer* renderer_) {
-	for (Tile* tile : Tiles_)
+	for (Tile* tile : tiles_)
 	{
 		tile->Render(renderer_);
 	}
@@ -43,10 +43,10 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
       {
          Grass* tmp = new Grass();
          tmp->Create("../Assets/grass.png", x * Config::TILE_SIZE, y * Config::TILE_SIZE);
-         tmp->x_ = x;
-         tmp->y_ = y;
+         tmp->position_.x_ = x;
+         tmp->position_.y_ = y;
          tmp->grid_ = this;
-         Tiles_.at(GetTileIndex(x,y))->grass_ = tmp;
+         tiles_.at(GetTileIndex(x,y))->grass_ = tmp;
          grass_->push_back(tmp);
 
          return true;
@@ -58,11 +58,11 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
 float Grid::EatGrass(float biteSize, Vector2 pos)
 {
    int index = GetTileIndex(pos.x_, pos.y_);
-   if (Tiles_.at(index)->grass_ == nullptr)
+   if (tiles_.at(index)->grass_ == nullptr)
    {
       return -1.0f;
    }
-   return Tiles_.at(index)->grass_->Eaten(biteSize); // Bless you God for this boutiful harvest. Amen.
+   return tiles_.at(index)->grass_->Eaten(biteSize); // Bless you God for this boutiful harvest. Amen.
 }
 
 int Grid::GetTileIndex(int x, int y)
@@ -95,19 +95,64 @@ const char* Grid::LookAtTile(int x, int y)
 
 const char* Grid::LookAtTile(int index)
 {
-   if (index > Tiles_.size()){
+   if (index > tiles_.size()){
       return "cbt";
    }
-   else if (Tiles_.at(index)->agents_[1] != nullptr) { // looks at the wolf
+   else if (tiles_.at(index)->agents_[1] != nullptr) { // looks at the wolf
       return "Wolf";
    }
-   else if (Tiles_.at(index)->agents_[0] != nullptr) { // looks at the sheep
+   else if (tiles_.at(index)->agents_[0] != nullptr) { // looks at the sheep
       return "Sheep";
    }
-   else if (Tiles_.at(index)->grass_ != nullptr) { // Looks at the grass
+   else if (tiles_.at(index)->grass_ != nullptr) { // Looks at the grass
       return "Grass";
    }
    else {
       return "Empty";
    }
+}
+
+Vector2* Grid::SenseSheep(Vector2 pos, float radius)
+{
+   float distance = 0;
+   float closestDst = -1;
+   Vector2* result = nullptr;
+   Vector2* tmp;
+   for (int i = 0; i < agents_->size(); i++)
+   {
+      tmp = &agents_->at(i)->position_;
+      
+      if (agents_->at(i)->species_ == Agent::WOLF)
+      {
+         continue;
+      }
+
+      Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
+      distance = magnitude(distVect);
+      if (distance < closestDst && distance <= radius || closestDst == -1)
+      {
+         result = tmp;
+      }
+   }
+   return result;
+}
+
+Vector2* Grid::SenseGrass(Vector2 pos, float radius)
+{
+   float distance = 0;
+   float closestDst = -1;
+   Vector2* result = nullptr;
+   Vector2* tmp;
+   for (int i = 0; i < grass_->size(); i++)
+   {
+      tmp = &grass_->at(i)->position_;
+
+      Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
+      distance = magnitude(distVect);
+      if (distance < closestDst && distance <= radius || closestDst == -1)
+      {
+         result = tmp;
+      }
+   }
+   return result;
 }

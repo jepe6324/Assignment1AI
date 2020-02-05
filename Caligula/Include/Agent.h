@@ -34,8 +34,6 @@ struct Agent : FSM
 
    AgentState* currentState_;
    std::vector<AgentState*> stateList_;
-	//wolflist
-	//grasslist
 
    Agent(const char* filepath,
          AgentState* startState,
@@ -48,7 +46,7 @@ struct Agent : FSM
    void Move(Vector2 newPos);
 	void MoveInDirection(Vector2 direction);
 
-   Vector2* SenseFood(); // Gives you the vector 2 of closest food.
+   void SenseFood(); // Gives you the vector 2 of closest food.
 	void Sense(Vector2 tileToLookAt);
 };
 

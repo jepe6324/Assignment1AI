@@ -7,6 +7,7 @@
 #include "Grid.h"
 #include "Agent.h"
 #include "Timer.h"
+#include "Vector.h"
 
 enum GrassState {
 	GROWING,
@@ -41,6 +42,6 @@ struct Grass {
 	float maturityAccumulator;
 	float tileToSpread;
 
-   int x_, y_; // grid placement
+   Vector2 position_; // grid placement
 };
 #endif // !GRASS_H_INCLUDED

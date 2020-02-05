@@ -50,7 +50,7 @@ void Agent::Move(Vector2 newPos) {
    Vector2 oldPos = position_;
 
    int index = grid_->GetTileIndex(oldPos.x_, oldPos.y_);
-   grid_->Tiles_.at(index)->agents_[0] = nullptr;
+   grid_->tiles_.at(index)->agents_[0] = nullptr;
 
    if (grid_->GetTileIndex(newPos.x_, newPos.y_) != -1)
    {
@@ -58,7 +58,7 @@ void Agent::Move(Vector2 newPos) {
    }
 
    index = grid_->GetTileIndex(position_.x_, position_.y_);
-   grid_->Tiles_.at(index)->agents_[0] = this;
+   grid_->tiles_.at(index)->agents_[0] = this;
 }
 
 void Agent::MoveInDirection(Vector2 direction)
@@ -70,13 +70,14 @@ void Agent::MoveInDirection(Vector2 direction)
 void Agent::SenseFood()
 
 {
-   switch (species_)
+   switch (species_){
 	case WOLF:
       target_ = grid_->SenseSheep(position_, detectionRadius_);
       break;
-   case SHEEP :
+   case SHEEP:
       target_ = grid_->SenseGrass(position_, detectionRadius_);
       break;
+   }
 }
 
 void Agent::Sense(Vector2 tileToLookAt)

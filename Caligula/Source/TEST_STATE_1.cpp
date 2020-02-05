@@ -21,17 +21,17 @@ void TEST_STATE_1::Enter()
 	std::cout << "TEST_STATE_1::Enter" << std::endl;
 	grid_.Create();
    grid_.grass_ = &Grass_;
-	int size = grid_.Tiles_.size();
+	int size = grid_.tiles_.size();
 	
 	for (int i = 0; i < 10; i++)
 	{
       int randomNumber = rand()% (size);
 		Grass* tmp = new Grass();
-		tmp->Create("../Assets/grass.png", grid_.Tiles_.at(randomNumber)->bounds_.x, grid_.Tiles_.at(randomNumber)->bounds_.y);
-      grid_.Tiles_.at(randomNumber)->grass_ = tmp;
+		tmp->Create("../Assets/grass.png", grid_.tiles_.at(randomNumber)->bounds_.x, grid_.tiles_.at(randomNumber)->bounds_.y);
+      grid_.tiles_.at(randomNumber)->grass_ = tmp;
 		Grass_.push_back(tmp);
-      tmp->x_ = tmp->bounds_.x / Config::TILE_SIZE;
-      tmp->y_ = tmp->bounds_.y / Config::TILE_SIZE;
+      tmp->position_.x_ = tmp->bounds_.x / Config::TILE_SIZE;
+      tmp->position_.y_ = tmp->bounds_.y / Config::TILE_SIZE;
       tmp->grid_ = &grid_;
 	}
 	for (int i = 0; i < 1; i++)
@@ -41,7 +41,7 @@ void TEST_STATE_1::Enter()
       tmpSheep->currentState_->agent_ = tmpSheep;
       tmpSheep->grid_ = &grid_;
       int index = grid_.GetTileIndex(13, 14);
-		grid_.Tiles_[index]->agents_[0] = tmpSheep;
+		grid_.tiles_[index]->agents_[0] = tmpSheep;
 		Sheep_.push_back(tmpSheep);
 	}
 }
@@ -62,9 +62,10 @@ bool TEST_STATE_1::Update()
       if (Grass_.at(i)->currentState_ == DEAD)
       {
          Grass* grass = Grass_.at(i);
-         int tileIndex = grid_.GetTileIndex(grass->x_, grass->y_);
-         grid_.Tiles_.at(tileIndex)->grass_ = nullptr;
+         int tileIndex = grid_.GetTileIndex(grass->position_.x_, grass->position_.y_);
+         grid_.tiles_.at(tileIndex)->grass_ = nullptr;
          Grass_.erase(Grass_.begin()+i);
+         delete grass;
       }
 	}
 	for (int i = 0; i < Sheep_.size(); i++)

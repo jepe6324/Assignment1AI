@@ -42,4 +42,12 @@ struct Vector2 {
 	}
 };
 
+
+static float magnitude(Vector2 vector) {
+   vector.x_ = powf(vector.x_, 2);
+   vector.y_ = powf(vector.y_, 2);
+   float total = vector.x_ + vector.y_;
+   return _CMATH_::sqrt(total);
+}
+
 #endif // !VECTOR_H_INCLUDED
