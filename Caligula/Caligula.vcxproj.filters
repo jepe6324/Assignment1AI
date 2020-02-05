@@ -105,6 +105,12 @@
     <ClCompile Include="Source\PursueState.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ScaredState.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BreedState.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Collider.h">
@@ -180,6 +186,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\PursueState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ScaredState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\BreedState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

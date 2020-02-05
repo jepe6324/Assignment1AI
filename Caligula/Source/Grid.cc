@@ -1,6 +1,7 @@
 //Grid.cc
 #include "Grid.h"
 #include "Config.h"
+#include "WanderState.h"
 #include <iostream>
 
 void Grid::Create()
@@ -53,6 +54,50 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
       }
    }
    return false;
+}
+
+bool Grid::Breed(Vector2 pos, Agent::Species specie)
+{
+	const char* tile = LookAtTile(pos.x_, pos.y_);
+	if (tile == "cbt") //outside bounds
+	{
+		return false;
+	}
+	switch (specie)
+	{
+		case Agent::Species::WOLF:
+			if (tile != "Wolf")
+			{
+				Agent* tmpWolf = new Agent("../Assets/wolf.png", new WanderState(), Vector2(13, 14));
+
+				tmpWolf->currentState_->agent_ = tmpWolf;
+				tmpWolf->currentState_->Enter();
+
+				tmpWolf->grid_ = this;
+				int index = GetTileIndex(13, 14);
+				tiles_[index]->agents_[1] = tmpWolf;
+				agents_->push_back(tmpWolf);
+				return true;
+			}
+			break;
+		case Agent::Species::SHEEP:
+			if (tile != "Sheep")
+			{
+				Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), Vector2(13, 14));
+
+				tmpSheep->currentState_->agent_ = tmpSheep;
+				tmpSheep->currentState_->Enter();
+
+				tmpSheep->grid_ = this;
+				int index = GetTileIndex(13, 14);
+				tiles_[index]->agents_[0] = tmpSheep;
+				agents_->push_back(tmpSheep);
+				return true;
+			}
+			break;
+	}
+	
+	return false;
 }
 
 float Grid::EatGrass(float biteSize, Vector2 pos)
