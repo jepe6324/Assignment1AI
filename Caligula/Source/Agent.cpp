@@ -9,6 +9,7 @@
 #include "Grid.h"
 
 #include "WanderState.h"
+#include "PursueState.h"
 
 Agent::Agent(const char* filepath,
              AgentState* startState,
@@ -17,12 +18,14 @@ Agent::Agent(const char* filepath,
    : collider_(startPos.x_, startPos.y_,30,20)
    , decideTimer_(2)
    , senseTimer_(4)
+   , hunger_(0)
+   , fear_(0)
 {
    sprite_ = Service<SpriteHandler>::Get()->CreateSprite(filepath, 0, 0, 20, 30);
    currentState_ = startState;
    stateList_ = states; 
    position_ = startPos;
-	detectionRadius_ = 3 * Config::TILE_SIZE;
+	detectionRadius_ = 3;
 }
 
 Agent::~Agent()
@@ -59,8 +62,8 @@ void Agent::Update(float dt) // As milliseconds
    }
 
    collider_.SetPosition(position_.x_ * Config::TILE_SIZE, position_.y_ * Config::TILE_SIZE);
-   if (hunger_ > 0 ) 
-      hunger_ -= dt;
+   if (hunger_ < 15 ) // Max hunger is 15
+      hunger_ += dt;
    if (fear_ > 0) 
       fear_ -= dt;
 }
@@ -113,16 +116,22 @@ void Agent::Decide()
    delete currentState_;
    currentState_ = nullptr;
 
+   std::cout << hunger_ << std::endl;
+
    if (fear_ > 10 || fear_ * 0.8f > hunger_ * 0.5f)
    {
       //Be scared
    }
    else if (hunger_ > 10 && target_ != nullptr)
    {
-      //currentState_ = new PursueState();
+      currentState_ = new PursueState();
       //Be hungry and eat
    }
    else
+   {
+      currentState_ = new WanderState();
+   }
+   if (currentState_ == nullptr)
    {
       currentState_ = new WanderState();
    }

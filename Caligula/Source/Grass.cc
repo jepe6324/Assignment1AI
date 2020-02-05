@@ -113,7 +113,7 @@ void Grass::Act(float dt) {
 	case EATEN:
 		if (EatenTimer_.IsDone())
 		{
-			currentState_ = GROWING;
+			currentState_ = DYING;
 		}
 		break;
 	}
@@ -133,7 +133,7 @@ float Grass::Eaten(float biteSize)
 	else
 	{
 		health_ += remainingHealth;
-		currentState_ = DYING;
+		currentState_ = DEAD;
 		return remainingHealth;
 	}
 }

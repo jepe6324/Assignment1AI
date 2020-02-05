@@ -153,6 +153,7 @@ Vector2* Grid::SenseGrass(Vector2 pos, float radius)
           || closestDst == -1 && distance <= radius)
       {
          result = tmp;
+         closestDst = distance;
       }
    }
    return result;

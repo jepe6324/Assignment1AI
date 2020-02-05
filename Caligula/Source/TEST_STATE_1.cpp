@@ -38,6 +38,7 @@ void TEST_STATE_1::Enter()
 	{
 		std::vector<AgentState*> yeet;
 		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), yeet, Vector2(13, 14));
+      tmpSheep->species_ = Agent::SHEEP;
       
       tmpSheep->currentState_->agent_ = tmpSheep;
       tmpSheep->currentState_->Enter();

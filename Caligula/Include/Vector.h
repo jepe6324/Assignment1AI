@@ -50,4 +50,9 @@ static float magnitude(Vector2 vector) {
    return _CMATH_::sqrt(total);
 }
 
+static float distance(Vector2 lhs, Vector2 rhs)
+{
+   return magnitude(lhs - rhs);
+}
+
 #endif // !VECTOR_H_INCLUDED
