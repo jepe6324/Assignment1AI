@@ -25,6 +25,7 @@ struct Agent : FSM
    Vector2 position_;
    Species species_;
    Grid* grid_;
+	float detectionRadius_;
 
    Vector2 danger_;
    Vector2 wall_;
@@ -33,6 +34,8 @@ struct Agent : FSM
 
    AgentState* currentState_;
    std::vector<AgentState*> stateList_;
+	//wolflist
+	//grasslist
 
    Agent(const char* filepath,
          AgentState* startState,
@@ -46,6 +49,7 @@ struct Agent : FSM
 	void MoveInDirection(Vector2 direction);
 
    Vector2* SenseFood(); // Gives you the vector 2 of closest food.
+	void Sense(Vector2 tileToLookAt);
 };
 
 #endif //!AGENT_H_INCLUDED

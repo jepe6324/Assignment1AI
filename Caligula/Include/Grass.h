@@ -6,24 +6,29 @@
 #include "Sprite.h"
 #include "Grid.h"
 #include "Agent.h"
+#include "Timer.h"
 
 enum GrassState {
 	GROWING,
 	TRAMPLED,
 	SPREADING,
 	DYING,
-   DEAD
+   DEAD,
+	EATEN
 };
 
 struct Grid;
 
 struct Grass {	
+	Grass();
+
 	void Create(const char* p_textureFilePath, int xPos, int yPos);
 	void Render(SDL_Renderer* renderer_);
 	void Sense(float dt);
 	void Decide(float dt);
    void Act(float dt);
 	float Eaten(float biteSize);
+	Timer EatenTimer_;
 
 	Sprite* currentSprite_;
 	SDL_Rect bounds_;
