@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Agent.cpp" />
+    <ClCompile Include="Source\BreedState.cc" />
     <ClCompile Include="Source\DeltaTime.cpp" />
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\CollisionHandler.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mouse.cpp" />
     <ClCompile Include="Source\Random.cc" />
+    <ClCompile Include="Source\ScaredState.cc" />
     <ClCompile Include="Source\Sound.cpp" />
     <ClCompile Include="Source\SoundHandler.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
@@ -169,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Agent.h" />
+    <ClInclude Include="Include\BreedState.h" />
     <ClInclude Include="Include\Collider.h" />
     <ClInclude Include="Include\CollisionHandler.h" />
     <ClInclude Include="Include\Config.h" />
@@ -180,6 +183,7 @@
     <ClInclude Include="Include\Keyboard.h" />
     <ClInclude Include="Include\Mouse.h" />
     <ClInclude Include="Include\Random.h" />
+    <ClInclude Include="Include\ScaredState.h" />
     <ClInclude Include="Include\Service.h" />
     <ClInclude Include="Include\Sound.h" />
     <ClInclude Include="Include\SoundHandler.h" />

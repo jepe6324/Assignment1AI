@@ -43,7 +43,6 @@ struct Agent : FSM
 
    Agent(const char* filepath,
          AgentState* startState,
-         std::vector<AgentState*> states,
          Vector2 startPos);
    ~Agent();
 
