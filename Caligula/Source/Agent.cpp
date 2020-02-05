@@ -16,8 +16,9 @@ Agent::Agent(const char* filepath,
 {
    sprite_ = Service<SpriteHandler>::Get()->CreateSprite(filepath, 0, 0, 20, 30);
    currentState_ = startState;
-   stateList_ = states;
+   stateList_ = states; 
    position_ = startPos;
+	detectionRadius_ = 3 * Config::TILE_SIZE;
 }
 
 Agent::~Agent()
@@ -66,3 +67,9 @@ void Agent::MoveInDirection(Vector2 direction)
 	Vector2 newPos = position_ + direction;
 	Move(newPos);
 }
+
+void Agent::Sense(Vector2 tileToLookAt)
+{
+	grid_->LookAtTile(grid_->GetTileIndex(tileToLookAt.x_, tileToLookAt.y_));
+}
+

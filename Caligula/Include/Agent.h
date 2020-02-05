@@ -20,10 +20,13 @@ struct Agent : FSM
    Vector2 position_;
    const char* species_;
    Grid* grid_;
+	float detectionRadius_;
 
 
    AgentState* currentState_;
    std::vector<AgentState*> stateList_;
+	//wolflist
+	//grasslist
 
    Agent(const char* filepath,
          AgentState* startState,
@@ -35,6 +38,7 @@ struct Agent : FSM
    void Update(float dt);
    void Move(Vector2 newPos);
 	void MoveInDirection(Vector2 direction);
+	void Sense(Vector2 tileToLookAt);
 };
 
 #endif //!AGENT_H_INCLUDED
