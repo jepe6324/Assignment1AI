@@ -8,11 +8,15 @@
 #include "DeltaTime.h"
 #include "Grid.h"
 
+#include "WanderState.h"
+
 Agent::Agent(const char* filepath,
              AgentState* startState,
              std::vector<AgentState*> states,
              Vector2 startPos)
    : collider_(startPos.x_, startPos.y_,30,20)
+   , decideTimer_(2)
+   , senseTimer_(4)
 {
    sprite_ = Service<SpriteHandler>::Get()->CreateSprite(filepath, 0, 0, 20, 30);
    currentState_ = startState;
@@ -42,7 +46,23 @@ void Agent::Update(float dt) // As milliseconds
       currentState_->Act(dt);
    }
 
+   if (senseTimer_.IsDone())
+   {
+      Sense();
+      senseTimer_.Reset();
+   }
+
+   if (decideTimer_.IsDone())
+   {
+      Decide();
+      decideTimer_.Reset();
+   }
+
    collider_.SetPosition(position_.x_ * Config::TILE_SIZE, position_.y_ * Config::TILE_SIZE);
+   if (hunger_ > 0 ) 
+      hunger_ -= dt;
+   if (fear_ > 0) 
+      fear_ -= dt;
 }
 
 void Agent::Move(Vector2 newPos) {
@@ -68,7 +88,6 @@ void Agent::MoveInDirection(Vector2 direction)
 }
 
 void Agent::SenseFood()
-
 {
    switch (species_){
 	case WOLF:
@@ -80,7 +99,33 @@ void Agent::SenseFood()
    }
 }
 
-void Agent::Sense(Vector2 tileToLookAt)
+void Agent::Sense()
 {
-	grid_->LookAtTile(grid_->GetTileIndex(tileToLookAt.x_, tileToLookAt.y_));
+   SenseFood();
+   //SenseDanger();
+   //SenseWall();
+}
+
+void Agent::Decide()
+{
+
+   currentState_->Exit();
+   delete currentState_;
+   currentState_ = nullptr;
+
+   if (fear_ > 10 || fear_ * 0.8f > hunger_ * 0.5f)
+   {
+      //Be scared
+   }
+   else if (hunger_ > 10 && target_ != nullptr)
+   {
+      //currentState_ = new PursueState();
+      //Be hungry and eat
+   }
+   else
+   {
+      currentState_ = new WanderState();
+   }
+   currentState_->agent_ = this;
+   currentState_->Enter();
 }

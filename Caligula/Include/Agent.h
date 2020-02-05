@@ -7,6 +7,7 @@
 #include "State.h"
 #include "Vector.h"
 #include "Collider.h"
+#include "Timer.h"
 
 struct Sprite;
 struct DeltaTime;
@@ -27,10 +28,15 @@ struct Agent : FSM
    Grid* grid_;
 	float detectionRadius_;
 
+   float hunger_;
+   float fear_;
+
    Vector2 danger_;
    Vector2 wall_;
    Vector2* target_;
 
+   Timer senseTimer_;
+   Timer decideTimer_;
 
    AgentState* currentState_;
    std::vector<AgentState*> stateList_;
@@ -47,7 +53,9 @@ struct Agent : FSM
 	void MoveInDirection(Vector2 direction);
 
    void SenseFood(); // Gives you the vector 2 of closest food.
-	void Sense(Vector2 tileToLookAt);
+	void Sense();
+
+   void Decide();
 };
 
 #endif //!AGENT_H_INCLUDED

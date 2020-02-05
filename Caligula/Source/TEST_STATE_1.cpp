@@ -38,7 +38,10 @@ void TEST_STATE_1::Enter()
 	{
 		std::vector<AgentState*> yeet;
 		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), yeet, Vector2(13, 14));
+      
       tmpSheep->currentState_->agent_ = tmpSheep;
+      tmpSheep->currentState_->Enter();
+
       tmpSheep->grid_ = &grid_;
       int index = grid_.GetTileIndex(13, 14);
 		grid_.tiles_[index]->agents_[0] = tmpSheep;

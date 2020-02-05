@@ -25,4 +25,5 @@ struct AgentState : State
 
    virtual void Decide(float dt) {};
    virtual void Act(float dt) {};
+   virtual bool Update() { return false; };
 };

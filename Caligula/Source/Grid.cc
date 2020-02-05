@@ -149,7 +149,8 @@ Vector2* Grid::SenseGrass(Vector2 pos, float radius)
 
       Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
       distance = magnitude(distVect);
-      if (distance < closestDst && distance <= radius || closestDst == -1)
+      if (distance < closestDst && distance <= radius
+          || closestDst == -1 && distance <= radius)
       {
          result = tmp;
       }
