@@ -33,13 +33,6 @@ void PursueState::Act(float dt)
          
          agent_->hunger_ -= agent_->grid_->EatGrass(15.0f * dt, *agent_->target_);
 
-         if (agent_->hunger_ < 0)
-         {
-            agent_->hunger_ = 0;
-            agent_->Sense();
-            agent_->Decide();
-            return;
-         }
          int targetIndex = agent_->grid_->GetTileIndex(*agent_->target_);
          if (agent_->grid_->tiles_.at(targetIndex)->grass_->health_ > 14.8f)
          {

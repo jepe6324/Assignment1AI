@@ -81,7 +81,6 @@ bool TEST_STATE_1::Update()
          grid_.tiles_.at(tileIndex)->agents_[0] = nullptr;
          grid_.agents_->erase(grid_.agents_->begin() + i);
          delete agent;
-         std::cout << "f" << std::endl;
       }
 	}
 	return true;
