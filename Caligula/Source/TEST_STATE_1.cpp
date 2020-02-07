@@ -39,14 +39,15 @@ void TEST_STATE_1::Enter()
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		int randomNumber = Random::Rand(0, size - 1);
-      //grid_.til
-		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), grid_.GetTilePos(randomNumber));
+		Vector2 random;
+		random.x_ = Random::Rand(0, (Config::SCREEN_WIDTH / Config::TILE_SIZE) - 1);
+		random.y_ = Random::Rand(0, (Config::SCREEN_HEIGHT / Config::TILE_SIZE) - 1);
+		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), random);
 		tmpSheep->species_ = Agent::SHEEP;
 
       tmpSheep->grid_ = &grid_;
-      //int index = grid_.GetTileIndex(tmpSheep->position_);// Hard coded spawn point
-		grid_.tiles_[randomNumber]->agents_[0] = tmpSheep;
+      int index = grid_.GetTileIndex(random);// Hard coded spawn point
+		grid_.tiles_[index]->agents_[0] = tmpSheep;
       grid_.agents_->push_back(tmpSheep);
 	}
 }
@@ -81,8 +82,6 @@ bool TEST_STATE_1::Update()
       {
          Agent* agent = grid_.agents_->at(i);
          int tileIndex = grid_.GetTileIndex(agent->position_);
-			if (tileIndex == -1)
-				continue;
          grid_.tiles_.at(tileIndex)->agents_[0] = nullptr;
          grid_.agents_->erase(grid_.agents_->begin() + i);
          delete agent;
