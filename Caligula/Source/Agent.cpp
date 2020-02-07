@@ -82,8 +82,6 @@ void Agent::Move(Vector2 newPos) {
    Vector2 oldPos = position_;
 
    int index = grid_->GetTileIndex(oldPos);
-	if (index == -1)
-		return;
    grid_->tiles_.at(index)->agents_[0] = nullptr;
 
    if (grid_->GetTileIndex(newPos) != -1)
