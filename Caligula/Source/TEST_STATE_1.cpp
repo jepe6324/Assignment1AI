@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Config.h"
 #include <time.h>
+#include "Random.h"
 
 #include <WanderState.h>
 #include <BreedState.h>
@@ -27,7 +28,7 @@ void TEST_STATE_1::Enter()
 	
 	for (int i = 0; i < 10; i++)
 	{
-      int randomNumber = rand()% (size);
+		int randomNumber = Random::Rand(0, size - 1);
 		Grass* tmp = new Grass();
 		tmp->Create("../Assets/grass.png", grid_.tiles_.at(randomNumber)->bounds_.x, grid_.tiles_.at(randomNumber)->bounds_.y);
       grid_.tiles_.at(randomNumber)->grass_ = tmp;
@@ -36,14 +37,15 @@ void TEST_STATE_1::Enter()
       tmp->position_.y_ = tmp->bounds_.y / Config::TILE_SIZE;
       tmp->grid_ = &grid_;
 	}
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), Vector2(13, 14));
-      tmpSheep->species_ = Agent::SHEEP;
+		int randomNumber = Random::Rand(0, size - 1);
+		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), Vector2(grid_.tiles_.at(randomNumber)->bounds_.x, grid_.tiles_.at(randomNumber)->bounds_.y));
+		tmpSheep->species_ == Agent::SHEEP;
 
       tmpSheep->grid_ = &grid_;
-      int index = grid_.GetTileIndex(13, 14);// Hard coded spawn point
-		grid_.tiles_[index]->agents_[0] = tmpSheep;
+      //int index = grid_.GetTileIndex(tmpSheep->position_);// Hard coded spawn point
+		grid_.tiles_[randomNumber]->agents_[0] = tmpSheep;
       grid_.agents_->push_back(tmpSheep);
 	}
 }
@@ -78,6 +80,8 @@ bool TEST_STATE_1::Update()
       {
          Agent* agent = grid_.agents_->at(i);
          int tileIndex = grid_.GetTileIndex(agent->position_);
+			if (tileIndex == -1)
+				continue;
          grid_.tiles_.at(tileIndex)->agents_[0] = nullptr;
          grid_.agents_->erase(grid_.agents_->begin() + i);
          delete agent;
