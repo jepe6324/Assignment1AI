@@ -34,6 +34,7 @@ struct Grass {
 	Sprite* currentSprite_;
 	SDL_Rect bounds_;
 	GrassState currentState_;
+   GrassState prevState_;
 	float minHealth_;
 	float health_;
    Grid* grid_;

@@ -21,6 +21,8 @@ struct State
 struct AgentState : State
 {
    Agent* agent_;
+   const char* stateID;
+
    ~AgentState() {};
 
    virtual void Decide(float dt) {};

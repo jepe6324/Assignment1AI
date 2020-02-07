@@ -51,6 +51,8 @@ struct Agent : FSM
    void Move(Vector2 newPos);
 	void MoveInDirection(Vector2 direction);
 
+   void ChangeState(AgentState* newState);
+
    void SenseFood(); // Gives you the vector 2 of closest food.
 	void Sense();
 

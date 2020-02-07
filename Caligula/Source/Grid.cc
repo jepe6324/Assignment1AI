@@ -186,11 +186,17 @@ Vector2* Grid::SenseGrass(Vector2 pos, float radius)
 {
    float distance = 0;
    float closestDst = -1;
+
    Vector2* result = nullptr;
    Vector2* tmp;
    for (int i = 0; i < grass_->size(); i++)
    {
       tmp = &grass_->at(i)->position_;
+
+      if (grass_->at(i)->health_ > 2.0f)
+      {
+         continue;
+      }
 
       Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
       distance = magnitude(distVect);
