@@ -4,6 +4,12 @@
 #include "WanderState.h"
 #include <iostream>
 
+Grid::Grid()
+   : grass_(new std::vector<Grass*>())
+   , agents_(new std::vector<Agent*>())
+{
+}
+
 void Grid::Create()
 {
 	int posX = 0;
@@ -47,8 +53,8 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
          tmp->position_.x_ = x;
          tmp->position_.y_ = y;
          tmp->grid_ = this;
-         tiles_.at(GetTileIndex(x,y))->grass_ = tmp;
          grass_->push_back(tmp);
+         tiles_.at(GetTileIndex(x, y))->grass_ = tmp;
 
          return true;
       }
@@ -56,25 +62,24 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
    return false;
 }
 
-bool Grid::Breed(Vector2 pos, Agent::Species specie)
+bool Grid::Breed(Vector2 pos, Agent::Species species)
 {
-	const char* tile = LookAtTile(pos.x_, pos.y_);
+	const char* tile = LookAtTile(pos);
 	if (tile == "cbt") //outside bounds
 	{
 		return false;
 	}
-	switch (specie)
+	switch (species)
 	{
 		case Agent::Species::WOLF:
 			if (tile != "Wolf")
 			{
-				Agent* tmpWolf = new Agent("../Assets/wolf.png", new WanderState(), Vector2(13, 14));
+				Agent* tmpWolf = new Agent("../Assets/wolf.png", new WanderState(), pos);
 
 				tmpWolf->currentState_->agent_ = tmpWolf;
-				tmpWolf->currentState_->Enter();
 
 				tmpWolf->grid_ = this;
-				int index = GetTileIndex(13, 14);
+				int index = GetTileIndex(pos);
 				tiles_[index]->agents_[1] = tmpWolf;
 				agents_->push_back(tmpWolf);
 				return true;
@@ -83,15 +88,15 @@ bool Grid::Breed(Vector2 pos, Agent::Species specie)
 		case Agent::Species::SHEEP:
 			if (tile != "Sheep")
 			{
-				Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), Vector2(13, 14));
-
+				Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), pos);
 				tmpSheep->currentState_->agent_ = tmpSheep;
-				tmpSheep->currentState_->Enter();
 
 				tmpSheep->grid_ = this;
-				int index = GetTileIndex(13, 14);
+            tmpSheep->hunger_ = 7.5f; // Hardcoded to half hunger
+				int index = GetTileIndex(pos);
 				tiles_[index]->agents_[0] = tmpSheep;
 				agents_->push_back(tmpSheep);
+            
 				return true;
 			}
 			break;
@@ -102,7 +107,7 @@ bool Grid::Breed(Vector2 pos, Agent::Species specie)
 
 float Grid::EatGrass(float biteSize, Vector2 pos)
 {
-   int index = GetTileIndex(pos.x_, pos.y_);
+   int index = GetTileIndex(pos);
    if (tiles_.at(index)->grass_ == nullptr)
    {
       return -1.0f;
@@ -128,6 +133,11 @@ int Grid::GetTileIndex(int x, int y)
    return index;
 }
 
+int Grid::GetTileIndex(Vector2 pos)
+{
+   return GetTileIndex(pos.x_, pos.y_);
+}
+
 const char* Grid::LookAtTile(int x, int y)
 {
    int index = GetTileIndex(x, y);
@@ -136,6 +146,11 @@ const char* Grid::LookAtTile(int x, int y)
       return "cbt";
    }
    return LookAtTile(index);
+}
+
+const char* Grid::LookAtTile(Vector2 pos)
+{
+   return LookAtTile(pos.x_, pos.y_);
 }
 
 const char* Grid::LookAtTile(int index)

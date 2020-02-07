@@ -22,7 +22,8 @@ Agent::Agent(const char* filepath,
    , fear_(0)
 {
    sprite_ = Service<SpriteHandler>::Get()->CreateSprite(filepath, 0, 0, 20, 30);
-   currentState_ = startState;
+   currentState_ = nullptr;
+   ChangeState(startState);
    position_ = startPos;
 	detectionRadius_ = 3;
    target_ = nullptr;
@@ -35,7 +36,7 @@ Agent::~Agent()
 void Agent::Render(SDL_Renderer* renderer_)
 {
 	SDL_Rect dst = collider_.GetBounds(); //{ position_. , bounds_.y + health_, currentSprite_->GetArea().w - (health_ * 2), currentSprite_->GetArea().h - (health_ * 2) };
-	//SDL_RenderCopy(renderer_, sprite_->GetTexture(), &sprite_->GetArea(), &dst);
+	SDL_RenderCopy(renderer_, sprite_->GetTexture(), &sprite_->GetArea(), &dst);
 
 	SDL_SetRenderDrawColor(renderer_, 255, 0, 0, 0);
 	if(Config::DEBUGRENDER == TRUE)
@@ -72,15 +73,15 @@ void Agent::Move(Vector2 newPos) {
    // These lines should be used when moving the agents
    Vector2 oldPos = position_;
 
-   int index = grid_->GetTileIndex(oldPos.x_, oldPos.y_);
+   int index = grid_->GetTileIndex(oldPos);
    grid_->tiles_.at(index)->agents_[0] = nullptr;
 
-   if (grid_->GetTileIndex(newPos.x_, newPos.y_) != -1)
+   if (grid_->GetTileIndex(newPos) != -1)
    {
       position_ = newPos;
    }
 
-   index = grid_->GetTileIndex(position_.x_, position_.y_);
+   index = grid_->GetTileIndex(position_);
    grid_->tiles_.at(index)->agents_[0] = this;
 }
 
@@ -92,9 +93,12 @@ void Agent::MoveInDirection(Vector2 direction)
 
 void Agent::ChangeState(AgentState* newState)
 {
-   currentState_->Exit();
-   delete currentState_;
-   currentState_ = nullptr;
+   if (currentState_ != nullptr)
+   {
+      currentState_->Exit();
+      delete currentState_;
+      currentState_ = nullptr;
+   }
 
    currentState_ = newState;
    currentState_->agent_ = this;
@@ -111,8 +115,6 @@ void Agent::SenseFood()
       target_ = grid_->SenseGrass(position_, detectionRadius_);
       break;
    }
-   currentState_->agent_ = this;
-   currentState_->Enter();
 }
 
 void Agent::Sense()
@@ -133,7 +135,7 @@ void Agent::Decide()
       //Be scared
    }
    else if ((hunger_ > 10 && target_ != nullptr)
-            || (prevState == "Pursue" && hunger_ > 0.5f && target_ != nullptr))
+            || (prevState == "Pursue" && hunger_ > 0.2f && target_ != nullptr))
    {
       ChangeState(new PursueState());
       //Be hungry and eat

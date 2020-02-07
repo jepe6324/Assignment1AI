@@ -2,33 +2,34 @@
 #include "Agent.h"
 #include "Grid.h"
 #include "WanderState.h"
+#include "Random.h"
 #include <iostream>
 
 BreedState::BreedState()
-	: BreedTimer_(3)
+	: BreedTimer_(0)
 {
-   hungerDecrease_ = 7.5f;
+   hungerIncrease_ = 7.5f; // How much energy the sheep uses to breed.
 }
 
 void BreedState::Enter()
 {
-   std::cout << "Breeding" << std::endl;
 }
 
 void BreedState::Act(float dt)
 {
-	if (BreedTimer_.IsDone() && BreedTimer_.paused_ != false)
-	{
-		agent_->grid_->Breed(agent_->position_, agent_->species_);
-		agent_->hunger_ += hungerDecrease_;
-		BreedTimer_.paused_ = true;
-
-      agent_->ChangeState(new WanderState());
-	}
+   float success = false;
+   for (int i = 0; i < 5; i++)
+   {
+      Vector2 spawnPos = agent_->position_;
+      spawnPos.x_ += Random::Rand(-1, 1);
+      spawnPos.y_ += Random::Rand(-1, 1);
+      if (agent_->grid_->Breed(spawnPos, agent_->species_))
+         break;
+   }
+   agent_->hunger_ += hungerIncrease_;
+   return agent_->ChangeState(new WanderState());
 }
 
 void BreedState::Exit()
 {
-	agent_->Sense();
-	agent_->Decide();
 }

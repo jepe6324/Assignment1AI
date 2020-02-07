@@ -12,7 +12,7 @@ struct Agent;
 struct BreedState : AgentState
 {
 	Timer BreedTimer_;
-	float hungerDecrease_;
+	float hungerIncrease_;
 	BreedState();
 
 	void Enter();

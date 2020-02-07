@@ -13,7 +13,6 @@ PursueState::PursueState()
 
 void PursueState::Enter()
 {
-   std::cout << "GRASS DETECTED: BEGINNING DESTROY SEQUENCE" << std::endl; //beep beep i'm a sheep
    if (agent_ == nullptr)
    {
       //Shits fucked yo
@@ -41,8 +40,7 @@ void PursueState::Act(float dt)
             agent_->Decide();
             return;
          }
-
-         int targetIndex = agent_->grid_->GetTileIndex(agent_->target_->x_, agent_->target_->y_);
+         int targetIndex = agent_->grid_->GetTileIndex(*agent_->target_);
          if (agent_->grid_->tiles_.at(targetIndex)->grass_->health_ > 14.8f)
          {
             agent_->target_ = nullptr;

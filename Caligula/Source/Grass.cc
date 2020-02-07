@@ -42,7 +42,7 @@ void Grass::Sense(float dt) {
 			currentState_ = DYING;
 	}
 
-   if (grid_->LookAtTile(position_.x_, position_.y_) != "Grass") // If it senses something other that grass, it's being trampled
+   if (grid_->LookAtTile(position_) != "Grass") // If it senses something other that grass, it's being trampled
    {
       prevState_ = currentState_;
       currentState_ = TRAMPLED;
@@ -121,9 +121,6 @@ float Grass::Eaten(float biteSize)
 	{
 		health_ += biteSize;
 		currentState_ = DYING;
-
-      currentSprite_ = Service<SpriteHandler>::Get()->CreateSprite("../Assets/wolf.png", 0, 0, bounds_.h, bounds_.w);
-
 		EatenTimer_.Start();
 		EatenTimer_.Reset();
 		return biteSize;

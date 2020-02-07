@@ -13,6 +13,8 @@ struct Grass; // NOTE: For some reason it suddenly requires forward declarations
 struct Tile;  // Ask Jerry for help
 
 struct Grid {
+   Grid();
+
 	void Create();
 	void Render(SDL_Renderer* renderer_);
    
@@ -21,7 +23,9 @@ struct Grid {
    float EatGrass(float biteSize, Vector2 pos);
 
    int GetTileIndex(int x, int y);
+   int GetTileIndex(Vector2 pos);
    const char* LookAtTile(int x, int y);
+   const char* LookAtTile(Vector2 pos);
    const char* LookAtTile(int index); // the grid has to now if a agent is in a tile
 	std::vector<Tile*> tiles_;
    std::vector<Grass*> *grass_;
