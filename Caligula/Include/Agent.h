@@ -27,6 +27,7 @@ struct Agent : FSM
    Species species_;
    Grid* grid_;
 	float detectionRadius_;
+   Vector2 direction_;
 
    float hunger_;
    float fear_;

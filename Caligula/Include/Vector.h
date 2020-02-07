@@ -15,7 +15,7 @@ struct Vector2 {
 	float x_;
 	float y_;
 
-   void normalize() {
+   void Normalize() {
       float x = powf(x_, 2);
       float y = powf(y_, 2);
       float total = x + y;
@@ -24,8 +24,8 @@ struct Vector2 {
       y_ /= magnitude;
    }
 	float dot(Vector2 first, Vector2 second) {
-		first.normalize();
-		second.normalize();
+		first.Normalize();
+		second.Normalize();
 		return first.x_ * second.x_ + first.y_, second.y_;
 	}
 	Vector2 operator+(Vector2 other) {
@@ -46,16 +46,21 @@ struct Vector2 {
 };
 
 
-static float magnitude(Vector2 vector) {
+static float Magnitude(Vector2 vector) {
    vector.x_ = powf(vector.x_, 2);
    vector.y_ = powf(vector.y_, 2);
    float total = vector.x_ + vector.y_;
    return _CMATH_::sqrt(total);
 }
 
-static float distance(Vector2 lhs, Vector2 rhs)
+static float Distance(Vector2 lhs, Vector2 rhs)
 {
-   return magnitude(lhs - rhs);
+   return Magnitude(lhs - rhs);
+}
+
+static Vector2 Lerp(Vector2 lhs, Vector2 rhs, float percent)
+{
+   return ( lhs + ( rhs - lhs ) * percent);
 }
 
 #endif // !VECTOR_H_INCLUDED

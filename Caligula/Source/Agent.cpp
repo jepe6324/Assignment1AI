@@ -7,6 +7,7 @@
 #include "Config.h"
 #include "DeltaTime.h"
 #include "Grid.h"
+#include "Random.h"
 
 #include "WanderState.h"
 #include "PursueState.h"
@@ -16,11 +17,18 @@ Agent::Agent(const char* filepath,
              AgentState* startState,
              Vector2 startPos)
    : collider_(startPos.x_, startPos.y_,30,20)
-   , decideTimer_(2)
-   , senseTimer_(4)
+   , decideTimer_(0.2f)
+   , senseTimer_(0.4f)
    , hunger_(0)
    , fear_(0)
 {
+   float i, j;
+   i = Random::Randf(-1, 1);
+   j = Random::Randf(-1, 1);
+   direction_.x_ = i;
+   direction_.y_ = j;
+   direction_.Normalize();
+
    sprite_ = Service<SpriteHandler>::Get()->CreateSprite(filepath, 0, 0, 20, 30);
    currentState_ = nullptr;
    ChangeState(startState);

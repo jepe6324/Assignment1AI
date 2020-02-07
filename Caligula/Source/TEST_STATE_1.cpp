@@ -50,10 +50,9 @@ void TEST_STATE_1::Enter()
 
 bool TEST_STATE_1::Update()
 {
-
    deltaTime_.Update();
+   grid_.Render(m_renderer);
 
-	grid_.Render(m_renderer);
 	for (int i = 0; i < grid_.grass_->size(); i++)
 	{
       grid_.grass_->at(i)->Sense(deltaTime_.AsSeconds());
@@ -72,8 +71,18 @@ bool TEST_STATE_1::Update()
 	}
 	for (int i = 0; i < grid_.agents_->size(); i++)
 	{
-		grid_.agents_->at(i)->Render(m_renderer);
       grid_.agents_->at(i)->Update(deltaTime_.AsSeconds());
+		grid_.agents_->at(i)->Render(m_renderer);
+
+      if (grid_.agents_->at(i)->hunger_ >= 15)
+      {
+         Agent* agent = grid_.agents_->at(i);
+         int tileIndex = grid_.GetTileIndex(agent->position_);
+         grid_.tiles_.at(tileIndex)->agents_[0] = nullptr;
+         grid_.agents_->erase(grid_.agents_->begin() + i);
+         delete agent;
+         std::cout << "f" << std::endl;
+      }
 	}
 	return true;
 }

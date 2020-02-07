@@ -188,7 +188,7 @@ Vector2* Grid::SenseSheep(Vector2 pos, float radius)
       }
 
       Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
-      distance = magnitude(distVect);
+      distance = Magnitude(distVect);
       if (distance < closestDst && distance <= radius || closestDst == -1)
       {
          result = tmp;
@@ -208,13 +208,8 @@ Vector2* Grid::SenseGrass(Vector2 pos, float radius)
    {
       tmp = &grass_->at(i)->position_;
 
-      if (grass_->at(i)->health_ > 2.0f)
-      {
-         continue;
-      }
-
       Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
-      distance = magnitude(distVect);
+      distance = Magnitude(distVect);
       if (distance < closestDst && distance <= radius
           || closestDst == -1 && distance <= radius)
       {

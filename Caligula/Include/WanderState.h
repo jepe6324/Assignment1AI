@@ -9,9 +9,9 @@ struct Agent;
 
 struct WanderState : AgentState 
 {
-	Vector2 direction_;
-
 	WanderState();
+
+   Vector2 direction_;
 
 	void Enter();
    void Act(float dt);

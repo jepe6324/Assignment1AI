@@ -11,7 +11,9 @@ Act
 	FUCKIGNRUN()
 	Wander()
 	Breed()
-	
+
+I want the wander state to be smoother, so that it doesn't snap to a direction
+I want the sheep to eat until they are full if they have started eating.
 It needs to know how to walk towards it.
 It needs to be able to look at nearby tiles to see if they are empty (Aka, see other agents)
 

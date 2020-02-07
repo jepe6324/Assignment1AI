@@ -17,7 +17,7 @@ void ScaredState::Enter()
 		direction_ = direction_ + (wall_ * weight_);
 	}
 	direction_ = direction_ * -1;
-	direction_.normalize();
+	direction_.Normalize();
 }
 
 void ScaredState::Act(float dt)
