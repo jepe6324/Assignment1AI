@@ -51,7 +51,7 @@ void TEST_STATE_1::Enter()
       grid_.tiles_[index]->agents_[0] = tmpSheep;
       grid_.agents_->push_back(tmpSheep);
 	}
-	for (int i = 0; i < 0; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		Vector2 random;
 		random.x_ = Random::Rand(0, (Config::SCREEN_WIDTH / Config::TILE_SIZE) - 1);

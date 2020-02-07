@@ -21,6 +21,7 @@ void Grass::Create(const char* p_textureFilePath, int xPos, int yPos)
 	currentSprite_ = Service<SpriteHandler>::Get()->CreateSprite(p_textureFilePath, 0, 0, bounds_.h, bounds_.w);
 
 	currentState_ = GROWING;
+   prevState_ = GROWING;
    decideAccumulator = 0;
 	maturityAccumulator = 5;
 }
@@ -44,7 +45,8 @@ void Grass::Sense(float dt) {
 
    if (grid_->LookAtTile(position_) != "Grass") // If it senses something other that grass, it's being trampled
    {
-      prevState_ = currentState_;
+      if (currentState_ != TRAMPLED)
+         prevState_ = currentState_;
       currentState_ = TRAMPLED;
    }
    else if (currentState_ == TRAMPLED) {

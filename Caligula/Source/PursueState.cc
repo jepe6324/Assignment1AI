@@ -14,10 +14,6 @@ PursueState::PursueState()
 
 void PursueState::Enter()
 {
-   if (agent_ == nullptr)
-   {
-      //Shits fucked yo
-   }
    color_ = { 0,255,0,0 };
 }
 
@@ -25,12 +21,9 @@ void PursueState::Act(float dt)
 {
    if (agent_->target_ != nullptr)
    {
-      //std::cout << agent_->target_->x_ << " " << agent_->target_->y_ << std::endl;
-
       Vector2 direction = (*agent_->target_ - agent_->position_);
-      direction.Normalize();
 
-      if (Distance(agent_->position_, *agent_->target_) <= 0.2f)
+      if (Distance(agent_->position_, *agent_->target_) <= 0.4f)
       {
          int targetIndex = agent_->grid_->GetTileIndex(*agent_->target_);
 
@@ -56,7 +49,7 @@ void PursueState::Act(float dt)
       else{
          agent_->direction_ = Lerp(agent_->direction_, direction, dt * 5);
          agent_->direction_.Normalize();
-         agent_->MoveInDirection(agent_->direction_ * agent_->speed_ * dt);
+         agent_->MoveInDirection(agent_->direction_ * (agent_->speed_ * dt));
       }
    }
 }

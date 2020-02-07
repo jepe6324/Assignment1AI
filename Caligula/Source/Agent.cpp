@@ -161,7 +161,7 @@ void Agent::Decide()
 
    //std::cout << hunger_ << std::endl;
 
-   if (fear_ > 5.0f || fear_ > hunger_ * 0.7f)
+   if (fear_ > 1.0f && fear_ > hunger_ * 0.7f)
    {
 		ChangeState(new ScaredState());
    }

@@ -76,13 +76,14 @@ bool Grid::Breed(Vector2 pos, Agent::Species species)
 	}
 	switch (species)
 	{
-		case Agent::Species::WOLF:
+		case Agent::WOLF:
 			if (tile != "Wolf")
 			{
 				Agent* tmpWolf = new Agent("../Assets/wolf.png", new WanderState(), pos);
 
 				tmpWolf->currentState_->agent_ = tmpWolf;
-
+            tmpWolf->species_ = Agent::WOLF;
+            tmpWolf->speed_ = 2;
 				tmpWolf->grid_ = this;
 				int index = GetTileIndex(pos);
 				tiles_[index]->agents_[1] = tmpWolf;
@@ -90,12 +91,12 @@ bool Grid::Breed(Vector2 pos, Agent::Species species)
 				return true;
 			}
 			break;
-		case Agent::Species::SHEEP:
+		case Agent::SHEEP:
 			if (tile != "Sheep")
 			{
 				Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), pos);
             tmpSheep->species_ = Agent::SHEEP;
-
+            tmpSheep->speed_ = 1;
 				tmpSheep->grid_ = this;
             tmpSheep->hunger_ = 7.5f; // Hardcoded to half hunger
 				int index = GetTileIndex(pos);
