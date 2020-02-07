@@ -19,6 +19,7 @@ struct Grid {
 	void Render(SDL_Renderer* renderer_);
    
    bool Spread(int x, int y);
+   bool Spread(Vector2 pos);
 	bool Breed(Vector2 pos, Agent::Species specie);
    float EatGrass(float biteSize, Vector2 pos);
 

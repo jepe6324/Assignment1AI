@@ -62,6 +62,11 @@ bool Grid::Spread(int x, int y) // The grid it wants to spread too
    return false;
 }
 
+bool Grid::Spread(Vector2 pos)
+{
+   return Spread(pos.x_, pos.y_);
+}
+
 bool Grid::Breed(Vector2 pos, Agent::Species species)
 {
 	const char* tile = LookAtTile(pos);
@@ -235,3 +240,28 @@ Vector2* Grid::SenseGrass(Vector2 pos, float radius)
    }
    return result;
 }
+
+
+/*
+
+Vector2 pos, float radius
+
+float dstLeft = pos.x_;
+float dstRight = 
+float dstUp = pos.y_;
+float dstDown
+
+if (dstLeft < radius)
+{
+}
+else if (dstRight < radius)
+{
+}
+
+if ( dstUp < radius)
+{
+}
+else if (dstDown < radius)
+{
+}
+*/

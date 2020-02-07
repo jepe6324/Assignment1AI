@@ -131,6 +131,11 @@ void Agent::Sense()
    //SenseWall();
 }
 
+void Agent::GetAttacked(float damage)
+{
+   hunger_ += damage;
+}
+
 void Agent::Decide()
 {
    const char* prevState = currentState_->stateID;

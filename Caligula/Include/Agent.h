@@ -57,6 +57,8 @@ struct Agent : FSM
    void SenseFood(); // Gives you the vector 2 of closest food.
 	void Sense();
 
+   void GetAttacked(float damage);
+
    void Decide();
 };
 

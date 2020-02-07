@@ -31,14 +31,18 @@ void PursueState::Act(float dt)
       if (Distance(agent_->position_, *agent_->target_) <= 0.2f)
       {
          
-         agent_->hunger_ -= agent_->grid_->EatGrass(15.0f * dt, *agent_->target_);
+         agent_->hunger_ -= agent_->grid_->EatGrass(15.0f * dt, *agent_->target_);// Sheep specific
 
          int targetIndex = agent_->grid_->GetTileIndex(*agent_->target_);
+         if (agent_->grid_->tiles_.at(targetIndex)->grass_ == nullptr)
+         {
+            return;
+         }
          if (agent_->grid_->tiles_.at(targetIndex)->grass_->health_ > 14.8f)
          {
             agent_->target_ = nullptr;
             agent_->grid_->tiles_.at(targetIndex)->grass_->currentState_ == GrassState::DEAD;
-         }
+         } // !Sheep specific
 
       }
       else{
