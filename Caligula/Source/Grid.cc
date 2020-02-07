@@ -138,6 +138,22 @@ int Grid::GetTileIndex(Vector2 pos)
    return GetTileIndex(pos.x_, pos.y_);
 }
 
+Vector2 Grid::GetTilePos(int index)
+{
+   Vector2 returnVector;
+   if (index >= tiles_.size())
+   {
+      return Vector2(-1, -1);
+   }
+
+   int maxX = Config::SCREEN_WIDTH / Config::TILE_SIZE;
+   int maxY = Config::SCREEN_HEIGHT / Config::TILE_SIZE;
+
+   returnVector.x_ = index % maxX;
+   returnVector.y_ = index / maxX;
+   return returnVector;
+}
+
 const char* Grid::LookAtTile(int x, int y)
 {
    int index = GetTileIndex(x, y);

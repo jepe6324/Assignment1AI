@@ -24,6 +24,7 @@ struct Grid {
 
    int GetTileIndex(int x, int y);
    int GetTileIndex(Vector2 pos);
+   Vector2 GetTilePos(int index);
    const char* LookAtTile(int x, int y);
    const char* LookAtTile(Vector2 pos);
    const char* LookAtTile(int index); // the grid has to now if a agent is in a tile

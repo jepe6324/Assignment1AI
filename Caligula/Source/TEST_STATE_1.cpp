@@ -40,8 +40,9 @@ void TEST_STATE_1::Enter()
 	for (int i = 0; i < 10; i++)
 	{
 		int randomNumber = Random::Rand(0, size - 1);
-		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), Vector2(grid_.tiles_.at(randomNumber)->bounds_.x, grid_.tiles_.at(randomNumber)->bounds_.y));
-		tmpSheep->species_ == Agent::SHEEP;
+      //grid_.til
+		Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), grid_.GetTilePos(randomNumber));
+		tmpSheep->species_ = Agent::SHEEP;
 
       tmpSheep->grid_ = &grid_;
       //int index = grid_.GetTileIndex(tmpSheep->position_);// Hard coded spawn point

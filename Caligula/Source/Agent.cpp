@@ -19,7 +19,7 @@ Agent::Agent(const char* filepath,
    : collider_(startPos.x_, startPos.y_,30,20)
    , decideTimer_(0.2f)
    , senseTimer_(0.4f)
-   , hunger_(0)
+   , hunger_(2)
    , fear_(0)
 {
    float i, j;
@@ -54,7 +54,6 @@ void Agent::Render(SDL_Renderer* renderer_)
 void Agent::Update(float dt) // As milliseconds
 {
    if (currentState_ != nullptr){
-      currentState_->Decide(dt); // add interval
       currentState_->Act(dt);
    }
 
