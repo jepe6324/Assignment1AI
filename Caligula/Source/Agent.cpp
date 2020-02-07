@@ -148,7 +148,7 @@ void Agent::Decide()
    {
       ChangeState(new WanderState());
    }
-   if (currentState_ == nullptr)
+   if (currentState_ == nullptr) // for some reason it wont go into the first else statement every time.
    {
       ChangeState(new WanderState());
    }

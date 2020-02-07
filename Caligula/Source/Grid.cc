@@ -89,7 +89,7 @@ bool Grid::Breed(Vector2 pos, Agent::Species species)
 			if (tile != "Sheep")
 			{
 				Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), pos);
-				tmpSheep->currentState_->agent_ = tmpSheep;
+            tmpSheep->species_ = Agent::SHEEP;
 
 				tmpSheep->grid_ = this;
             tmpSheep->hunger_ = 7.5f; // Hardcoded to half hunger
