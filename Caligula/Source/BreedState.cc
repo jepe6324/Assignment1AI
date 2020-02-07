@@ -9,6 +9,7 @@ BreedState::BreedState()
 	: BreedTimer_(0)
 {
    hungerIncrease_ = 7.5f; // How much energy the sheep uses to breed.
+   color_ = { 255,255,255,0 };
 }
 
 void BreedState::Enter()

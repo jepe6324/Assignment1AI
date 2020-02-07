@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <SDL.h>
 
 struct Agent;
 
@@ -22,6 +23,7 @@ struct AgentState : State
 {
    Agent* agent_;
    const char* stateID;
+   SDL_Color color_;
 
    ~AgentState() {};
 

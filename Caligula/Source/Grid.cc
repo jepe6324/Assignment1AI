@@ -210,9 +210,10 @@ Vector2* Grid::SenseSheep(Vector2 pos, float radius)
 
       Vector2 distVect = *tmp - pos; // I don't know how to improve operator overloading
       distance = Magnitude(distVect);
-      if (distance < closestDst && distance <= radius || closestDst == -1)
+      if ((distance < closestDst || closestDst == -1) && distance <= radius)
       {
          result = tmp;
+         closestDst = distance;
       }
    }
    return result;
@@ -260,37 +261,37 @@ Vector2 Grid::SenseWolves(Vector2 pos, float radius)
 		distance = Magnitude(distVect);
 		if (distance <= radius)
 		{
-			result = result + tmp;
+			result = result + distVect;
 		}
 	}
-	return result;
+	return result * -1;
 }
 
 Vector2 Grid::SenseWall(Vector2 pos, float radius)
 {
 	Vector2 result = { 0,0 };
-	radius = radius / 3;
-	float distLeft = pos.x_;
-	float distRight = Config::SCREEN_WIDTH / Config::TILE_SIZE - pos.x_;
-	float distUp = pos.y_;
-	float distDown = Config::SCREEN_HEIGHT / Config::TILE_SIZE - pos.y_;
-
+	radius = radius;
+	float distLeft = fabs(pos.x_);
+	float distRight = fabs(Config::SCREEN_WIDTH / Config::TILE_SIZE - pos.x_);
+	float distUp = fabs(pos.y_);
+	float distDown = fabs(Config::SCREEN_HEIGHT / Config::TILE_SIZE - pos.y_);
+   
 	if (distLeft < radius)
 	{
-		result.x_ = 1;
+		result.x_ = 1 / distLeft;
 	}
 	else if (distRight < radius)
 	{
-		result.x_ = -1;
+      result.x_ = -1 / distRight;
 	}
 
 	if (distUp < radius)
 	{
-		result.y_ = 1;
+		result.y_ = 1 / distUp;
 	}
 	else if (distDown < radius)
 	{
-		result.y_ = -1;
+		result.y_ = -1 / distDown;
 	}
 	return result;
 }

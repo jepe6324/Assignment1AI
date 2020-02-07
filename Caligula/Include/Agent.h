@@ -28,12 +28,14 @@ struct Agent : FSM
    Grid* grid_;
 	float detectionRadius_;
    Vector2 direction_;
+   float speed_;
 
    float hunger_;
    float fear_;
 
    Vector2 danger_;
    Vector2* target_;
+   Vector2 wall_;
 
    Timer senseTimer_;
    Timer decideTimer_;
@@ -58,7 +60,7 @@ struct Agent : FSM
 	void SenseDanger();
 	void Sense();
 
-   void GetAttacked(float damage);
+   float Die();
 
    void Decide();
 };

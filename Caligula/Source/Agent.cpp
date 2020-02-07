@@ -47,7 +47,7 @@ void Agent::Render(SDL_Renderer* renderer_)
 	SDL_Rect dst = collider_.GetBounds(); //{ position_. , bounds_.y + health_, currentSprite_->GetArea().w - (health_ * 2), currentSprite_->GetArea().h - (health_ * 2) };
 	SDL_RenderCopy(renderer_, sprite_->GetTexture(), &sprite_->GetArea(), &dst);
 
-	SDL_SetRenderDrawColor(renderer_, 255, 0, 0, 0);
+	SDL_SetRenderDrawColor(renderer_, currentState_->color_.r, currentState_->color_.g, currentState_->color_.b, 255);
 	if(Config::DEBUGRENDER == TRUE)
 		SDL_RenderDrawRect(renderer_, &collider_.GetBounds());
 }
@@ -73,7 +73,7 @@ void Agent::Update(float dt) // As milliseconds
    collider_.SetPosition(position_.x_ * Config::TILE_SIZE, position_.y_ * Config::TILE_SIZE);
    if (hunger_ < 15) // Max hunger is 15
       hunger_ += dt;
-   if (fear_ > 0) 
+   if (fear_ > 0.0f) 
       fear_ -= 7.5f * dt;
 }
 
@@ -127,16 +127,16 @@ void Agent::SenseFood()
 
 void Agent::SenseWall()
 {
-	direction_ = direction_ + grid_->SenseWall(position_, detectionRadius_);
-	direction_.Normalize();
+   wall_ = grid_->SenseWall(position_, detectionRadius_);
+	//direction_ = direction_;
 }
 
 void Agent::SenseDanger()
 {
-	danger_ = danger_ + grid_->SenseWolves(position_, detectionRadius_);
+	danger_ = grid_->SenseWolves(position_, detectionRadius_);
 	if (danger_.x_ != 0 && danger_.y_ != 0)
 	{
-		fear_ += 15;
+		fear_ = 15;
 	}
 }
 
@@ -148,9 +148,11 @@ void Agent::Sense()
    SenseWall();
 }
 
-void Agent::GetAttacked(float damage)
+float Agent::Die()
 {
-   hunger_ += damage;
+   float returnValue = 15 - hunger_;
+   hunger_ = 15;
+   return returnValue;
 }
 
 void Agent::Decide()
@@ -159,7 +161,7 @@ void Agent::Decide()
 
    //std::cout << hunger_ << std::endl;
 
-   if (fear_ > 10 || fear_ * 0.8f > hunger_ * 0.5f)
+   if (fear_ > 5.0f || fear_ > hunger_ * 0.7f)
    {
 		ChangeState(new ScaredState());
    }

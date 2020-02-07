@@ -44,19 +44,22 @@ void TEST_STATE_1::Enter()
       random.y_ = Random::Rand(0, ( Config::SCREEN_HEIGHT / Config::TILE_SIZE ) - 1);
       Agent* tmpSheep = new Agent("../Assets/sheep.png", new WanderState(), random);
       tmpSheep->species_ = Agent::SHEEP;
+      tmpSheep->speed_ = 1;
 
       tmpSheep->grid_ = &grid_;
       int index = grid_.GetTileIndex(random);// Hard coded spawn point
       grid_.tiles_[index]->agents_[0] = tmpSheep;
       grid_.agents_->push_back(tmpSheep);
 	}
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 0; i++)
 	{
 		Vector2 random;
 		random.x_ = Random::Rand(0, (Config::SCREEN_WIDTH / Config::TILE_SIZE) - 1);
 		random.y_ = Random::Rand(0, (Config::SCREEN_HEIGHT / Config::TILE_SIZE) - 1);
 		Agent* tmpWolf = new Agent("../Assets/wolf.png", new WanderState(), random);
 		tmpWolf->species_ = Agent::WOLF;
+
+      tmpWolf->speed_ = 2;
 
 		tmpWolf->grid_ = &grid_;
 		int index = grid_.GetTileIndex(random);// Hard coded spawn point

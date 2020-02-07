@@ -15,6 +15,8 @@ void WanderState::Enter()
    direction_.Normalize();
 	//get position of agent
 	//get a direction
+
+   color_ = { 0,0,255,0 };
 }
 void WanderState::Exit()
 {
@@ -23,7 +25,7 @@ void WanderState::Exit()
 
 void WanderState::Act(float dt)
 {
-   agent_->direction_ = Lerp(agent_->direction_, direction_, dt);
+   agent_->direction_ = Lerp(agent_->direction_, direction_ + agent_->wall_, dt);
    agent_->direction_.Normalize();
    agent_->MoveInDirection(agent_->direction_ * dt);
 }
