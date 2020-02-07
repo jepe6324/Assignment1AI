@@ -40,6 +40,9 @@ struct Vector2 {
 	Vector2 operator*(float multiplier) {
 		return Vector2(x_ * multiplier, y_ * multiplier);
 	}
+	Vector2 operator*(Vector2 other) {
+		return Vector2(x_ * other.x_, y_ * other.y_);
+	}
 	bool operator!=(Vector2 other) {
 		return x_ == other.x_ && y_ == other.y_ ? x_ != other.x_ && y_ != other.y_ : false;
 	}

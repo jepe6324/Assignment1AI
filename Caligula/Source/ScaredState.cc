@@ -4,27 +4,26 @@
 
 ScaredState::ScaredState()
 {
-	weight_ * 2;
 }
 
 void ScaredState::Enter()
 {
-	std::cout << "SCARED SHEEP!" << std::endl;
-	direction_ = agent_->danger_;
-	wall_ = agent_->wall_;
-	if (wall_ != Vector2(0, 0))
-	{
-		direction_ = direction_ + (wall_ * weight_);
-	}
-	direction_ = direction_ * -1;
-	direction_.Normalize();
+	std::cout << "scared" << std::endl;
+	direction_ = agent_->direction_ + agent_->danger_;
+	//agent_->danger_.Normalize();
+	
+	//&agent_direction_ = direction_ + agent_->danger_;
 }
 
 void ScaredState::Act(float dt)
 {
-	agent_->MoveInDirection(direction_ * dt);
+	int yeet = 0;
+	agent_->direction_ = Lerp(agent_->direction_, agent_->danger_, dt * 5);
+	agent_->direction_.Normalize();
+	agent_->MoveInDirection(agent_->direction_ * dt);
 }
 
 void ScaredState::Exit()
 {
+	agent_->danger_ = Vector2(0, 0);
 }

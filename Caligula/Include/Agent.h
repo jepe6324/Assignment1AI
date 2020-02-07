@@ -33,7 +33,6 @@ struct Agent : FSM
    float fear_;
 
    Vector2 danger_;
-   Vector2 wall_;
    Vector2* target_;
 
    Timer senseTimer_;
@@ -55,6 +54,8 @@ struct Agent : FSM
    void ChangeState(AgentState* newState);
 
    void SenseFood(); // Gives you the vector 2 of closest food.
+	void SenseWall();
+	void SenseDanger();
 	void Sense();
 
    void GetAttacked(float damage);

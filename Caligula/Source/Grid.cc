@@ -241,27 +241,56 @@ Vector2* Grid::SenseGrass(Vector2 pos, float radius)
    return result;
 }
 
-
-/*
-
-Vector2 pos, float radius
-
-float dstLeft = pos.x_;
-float dstRight = 
-float dstUp = pos.y_;
-float dstDown
-
-if (dstLeft < radius)
+Vector2 Grid::SenseWolves(Vector2 pos, float radius)
 {
-}
-else if (dstRight < radius)
-{
+	float distance = 0;
+	Vector2 result = { 0,0 };
+	//radius = radius / 2;
+	Vector2 tmp;
+	for (int i = 0; i < agents_->size(); i++)
+	{
+		tmp = agents_->at(i)->position_;
+
+		if (agents_->at(i)->species_ == Agent::SHEEP)
+		{
+			continue;
+		}
+
+		Vector2 distVect = tmp - pos; // I don't know how to improve operator overloading
+		distance = Magnitude(distVect);
+		if (distance <= radius)
+		{
+			result = result + tmp;
+		}
+	}
+	return result;
 }
 
-if ( dstUp < radius)
+Vector2 Grid::SenseWall(Vector2 pos, float radius)
 {
+	Vector2 result = { 0,0 };
+	radius = radius / 3;
+	float distLeft = pos.x_;
+	float distRight = Config::SCREEN_WIDTH / Config::TILE_SIZE - pos.x_;
+	float distUp = pos.y_;
+	float distDown = Config::SCREEN_HEIGHT / Config::TILE_SIZE - pos.y_;
+
+	if (distLeft < radius)
+	{
+		result.x_ = 1;
+	}
+	else if (distRight < radius)
+	{
+		result.x_ = -1;
+	}
+
+	if (distUp < radius)
+	{
+		result.y_ = 1;
+	}
+	else if (distDown < radius)
+	{
+		result.y_ = -1;
+	}
+	return result;
 }
-else if (dstDown < radius)
-{
-}
-*/

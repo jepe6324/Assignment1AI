@@ -11,8 +11,6 @@ struct Agent;
 struct ScaredState : AgentState
 {
 	Vector2 direction_;
-	Vector2 wall_;
-	float weight_;
 
 	ScaredState();
 

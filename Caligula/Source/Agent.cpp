@@ -12,6 +12,7 @@
 #include "WanderState.h"
 #include "PursueState.h"
 #include "BreedState.h"
+#include "ScaredState.h"
 
 Agent::Agent(const char* filepath,
              AgentState* startState,
@@ -73,7 +74,7 @@ void Agent::Update(float dt) // As milliseconds
    if (hunger_ < 15) // Max hunger is 15
       hunger_ += dt;
    if (fear_ > 0) 
-      fear_ -= dt;
+      fear_ -= 7.5f * dt;
 }
 
 void Agent::Move(Vector2 newPos) {
@@ -124,11 +125,27 @@ void Agent::SenseFood()
    }
 }
 
+void Agent::SenseWall()
+{
+	direction_ = direction_ + grid_->SenseWall(position_, detectionRadius_);
+	direction_.Normalize();
+}
+
+void Agent::SenseDanger()
+{
+	danger_ = danger_ + grid_->SenseWolves(position_, detectionRadius_);
+	if (danger_.x_ != 0 && danger_.y_ != 0)
+	{
+		fear_ += 15;
+	}
+}
+
 void Agent::Sense()
 {
    SenseFood();
-   //SenseDanger();
-   //SenseWall();
+	if(species_ == Agent::SHEEP)
+		SenseDanger();
+   SenseWall();
 }
 
 void Agent::GetAttacked(float damage)
@@ -144,7 +161,7 @@ void Agent::Decide()
 
    if (fear_ > 10 || fear_ * 0.8f > hunger_ * 0.5f)
    {
-      //Be scared
+		ChangeState(new ScaredState());
    }
    else if ((hunger_ > 10 && target_ != nullptr)
             || (prevState == "Pursue" && hunger_ > 0.2f && target_ != nullptr))

@@ -35,6 +35,8 @@ struct Grid {
 
    Vector2* SenseSheep(Vector2 pos, float radius);
    Vector2* SenseGrass(Vector2 pos, float radius);
+	Vector2 SenseWolves(Vector2 pos, float radius);
+	Vector2 SenseWall(Vector2 pos, float radius);
 };
 
 #endif // !GRID_H_INCLUDED
